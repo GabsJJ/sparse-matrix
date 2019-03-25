@@ -20,6 +20,16 @@ public class Celula : IComparable<Celula>
         this.Valor = val;
     }
 
+    //Cria uma célula cujo os atributos linha, coluna e valor são passados por parâmentro
+    public Celula(int li, int col, double val)
+    {
+        this.Direita = null;
+        this.Abaixo = null;
+        this.Linha = li;
+        this.Coluna = col;
+        this.Valor = val;
+    }
+
     //Usado pra instanciar o noCabeca
     public Celula()
     {

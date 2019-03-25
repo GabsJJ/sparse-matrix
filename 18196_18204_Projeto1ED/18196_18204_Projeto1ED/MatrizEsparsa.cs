@@ -28,7 +28,37 @@ public class MatrizEsparsa
     public bool LinhasVazias { get => NoCabeca.Abaixo == null; }
     public Celula NoCabeca { get => noCabeca; set => noCabeca = value; }
 
-    public void CriarNosCabecas(int qtdLinhas, int qtdColunas)
+    /*public void PrintarMatriz()
+    {
+        if (!EstaVazia)
+        {
+            if (Linhas != 0 && Colunas != 0)
+            {
+                Celula linhaAtual = NoCabeca.Abaixo;
+                Celula ultimoValor = linhaAtual.Direita;
+                int contAuxCol = 1;
+                while (linhaAtual != NoCabeca)
+                {
+                    Celula colunaAtual = NoCabeca.Direita;
+                    while (colunaAtual != NoCabeca)
+                    {
+                        if (contAuxCol == ultimoValor.Coluna)
+                            Console.Write(ultimoValor.Valor.ToString().PadRight(4));
+                        else
+                            Console.Write("0   ");
+                        colunaAtual = colunaAtual.Direita;
+                        contAuxCol++;
+                    }
+                    Console.WriteLine();
+                    linhaAtual = linhaAtual.Abaixo;
+                    ultimoValor = linhaAtual.Direita;
+                    contAuxCol = 1;
+                }
+            }
+        }
+    }*/
+
+    private void CriarNosCabecas(int qtdLinhas, int qtdColunas)
     {
         if (qtdLinhas > 1 && qtdColunas > 1)
         {
@@ -74,8 +104,43 @@ public class MatrizEsparsa
         int contAuxLinhas = 0, contAuxColunas = 0;
         while (contAuxColunas < Colunas)
         {
-
+            //vai utilizar o método de criar nós cabeca
         }
+    }
+
+    public bool ExisteDado(Celula dado, ref Celula linhaProcurada, ref Celula colunaProcurada)
+    {
+        bool achou = false;
+
+        if (dado.Valor != 0)
+        {
+            if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
+            {
+                Celula atual = NoCabeca.Abaixo;
+                int contAuxLinhas = 1, contAuxColunas = 1;
+                while (contAuxLinhas <= dado.Linha)
+                {
+                    if (contAuxLinhas == dado.Linha)
+                        linhaProcurada = atual;
+                    else
+                        atual = atual.Abaixo;
+                    contAuxLinhas++;
+                }
+                atual = NoCabeca.Direita;
+                while (contAuxColunas <= dado.Coluna)
+                {
+                    if (contAuxColunas == dado.Coluna)
+                        colunaProcurada = atual;
+                    else
+                        atual = atual.Direita;
+                    contAuxColunas++;
+                }
+            }
+            if (linhaProcurada.Valor == dado.Valor && colunaProcurada.Valor == dado.Valor)
+                achou = true;
+        }
+
+        return achou;
     }
 
     public void InserirCelulaMatriz(Celula dado)
@@ -84,48 +149,40 @@ public class MatrizEsparsa
         {
             if (dado.Valor != 0)
             {
-                if (dado.Coluna > 0 && dado.Linha > 0)
+                if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
                 {
-                    Celula atual = NoCabeca.Abaixo, ultimoNoAdicionado = null;
-                    int contAuxLinhas = 1, contAuxColunas = 1;
-                    while (contAuxLinhas <= dado.Linha)
+                    Celula ultimoLinhaAdicionada = null, ultimoColunaAdicionada = null, linhaAinserir = null, colunaAinserir = null;
+                    //Existe dado retorna o nó cabeca da linha e da coluna a inserir
+                    if (!ExisteDado(dado, ref linhaAinserir, ref colunaAinserir))
                     {
-                        if (contAuxLinhas == dado.Linha)
-                        {
-                            //verifica se a lista circular da linha atual esta vazia
-                            if (atual.Direita == atual)
-                                atual.Direita = dado;
-                            else
-                                ultimoNoAdicionado.Direita = dado;
-                            dado.Direita = atual;
-                            ultimoNoAdicionado = dado;
-                        }
+                        //1º insere na linha
+                        //se a linha esta vazia
+                        if (linhaAinserir.Direita == linhaAinserir)
+                            linhaAinserir.Direita = dado;
                         else
-                            atual = atual.Abaixo;
-                        contAuxLinhas++;
-                    }
-                    atual = NoCabeca.Direita;
-                    while (contAuxColunas <= dado.Coluna)
-                    {
-                        if (contAuxColunas == dado.Coluna)
-                        {
-                            //verifica se a lista circular da coluna atual esta vazia
-                            if (atual.Abaixo == atual)
-                                atual.Abaixo = dado;
-                            else
-                                ultimoNoAdicionado.Abaixo = dado;
-                            dado.Abaixo = atual;
-                            ultimoNoAdicionado = dado;
-                        }
+                            ultimoLinhaAdicionada.Direita = dado;
+                        dado.Direita = linhaAinserir;
+                        ultimoLinhaAdicionada = dado;
+
+                        //2º insere na coluna
+                        //se a coluna esta vazia
+                        if (colunaAinserir.Abaixo == colunaAinserir)
+                            colunaAinserir.Abaixo = dado;
                         else
-                            atual = atual.Direita;
-                        contAuxColunas++;
+                            ultimoColunaAdicionada.Direita = dado;
+                        dado.Abaixo = colunaAinserir;
+                        ultimoColunaAdicionada = dado;
                     }
                 }
             }
-            //else
-            //remover
+            else
+                Remover(dado);
         }
+    }
+
+    public void Remover(Celula dado)
+    {
+
     }
 
     public void LerRegistro(StreamReader arquivo)
@@ -139,41 +196,5 @@ public class MatrizEsparsa
             }
         }
     }
-
-    /*public bool ExisteDado(Celula valor, ref ListaCircular linha, ref ListaCircular coluna)
-    {
-        bool achou = false;
-        if (!EstaVazia)
-        {
-            ListaCircular linhaAnterior = null, colunaAnterior = null,
-                   linhaAtual = NoCabecaLinhas.Abaixo, colunaAtual = NoCabecasColunas.Direita;
-            while (linhaAtual != null && colunaAtual != null)
-            {
-                if (colunaAtual.Coluna < valor.Coluna && linhaAtual.Linha < valor.Linha)
-                {
-                    linhaAnterior = linhaAtual;
-                    colunaAnterior = colunaAtual;
-                    linhaAtual = linhaAtual.Abaixo;
-                    colunaAtual = colunaAtual.Abaixo;
-                }
-                else
-                {
-                    linha = linhaAtual;
-                    coluna = colunaAtual;
-                    achou = true;
-                }   
-            }
-        }
-        return achou;
-    }
-
-    public void Inserir(Celula valor)
-    {
-        ListaCircular linhaAInserir = null, colunaAINserir = null;
-        if(!ExisteDado(valor, ref linhaAInserir, ref colunaAINserir))
-        {
-
-        }
-    }*/
 }
 

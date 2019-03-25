@@ -11,9 +11,12 @@ namespace teste
         static void Main(string[] args)
         {
             var matriz = new MatrizEsparsa();
-            matriz.CriarNosCabecas(2,2);
+            matriz.CriarNosCabecas(10,10);
 
-            Celula valor = new Celula(null,null,2,2,20);
+            Celula valor1 = new Celula(null, null, 5, 5, 20);
+            matriz.InserirCelulaMatriz(valor1);
+
+            Celula valor = new Celula(null,null,5,5,0);
             matriz.InserirCelulaMatriz(valor);
             matriz.PrintarMatriz();
             Console.ReadLine();
