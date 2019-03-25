@@ -1,0 +1,8 @@
+- 21/03 - Começamos a pensar na estrutura do projeto e criamos algumas classes que vão ser essenciais para o projeto, como a classe Celula,
+a classe ListaCircular e a ListaLigadaCruzada
+
+- 24/03 - Acabamos pensando melhor e optando por utilizar apenas as classes, Celula e MatrizEsparsa. Também implementamos o método
+de inserir dados na matriz, assim como um método de printar os dados para teste
+
+- 25/03 - Implementamos o método ExisteDado(), que retorna o nó cabeça da coluna e da linha onde o elemento será adicionado. Começamos
+a pensar no método de remover os elementos da matriz também
