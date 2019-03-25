@@ -14,6 +14,7 @@ public class ListaSimples<Dado> where Dado : IComparable<Dado>
         quantosNos = 0;
         primeiroAcessoDoPercurso = false;
     }
+
     public void percorrerLista()
     {
         atual = primeiro;
