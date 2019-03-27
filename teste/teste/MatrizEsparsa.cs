@@ -9,7 +9,7 @@ public class MatrizEsparsa
 {
     int linhas, colunas;
     //Nó -1 e -1
-    Celula noCabeca, ultimaLinhaAdicionada, ultimaColunaAdicionada;
+    Celula noCabeca, ultimaLinhaAdicionada, ultimaColunaAdicionada, celulaLinhaAnterior, celulaColunaAnterior;
     bool primeiraLeitura;
 
     const int tamanhoNumero = 4;
@@ -17,7 +17,7 @@ public class MatrizEsparsa
     public MatrizEsparsa()
     {
         Linhas = Colunas = 0;
-        NoCabeca = null;
+        NoCabeca = celulaColunaAnterior = celulaLinhaAnterior = null;
         primeiraLeitura = true;
         ultimaLinhaAdicionada = ultimaColunaAdicionada = null;
     }
@@ -37,22 +37,26 @@ public class MatrizEsparsa
             {
                 Celula linhaAtual = NoCabeca.Abaixo;
                 Celula ultimoValor = linhaAtual.Direita;
+                Celula elementoComValor = linhaAtual.Direita;
                 int contAuxCol = 1;
                 while (linhaAtual != NoCabeca)
                 {
                     Celula colunaAtual = NoCabeca.Direita;
                     while (colunaAtual != NoCabeca)
                     {
-                        if (contAuxCol == ultimoValor.Coluna)
-                            Console.Write(ultimoValor.Valor.ToString().PadRight(4));
+                        if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
+                        {
+                            Console.Write(elementoComValor.Valor.ToString().PadRight(4));
+                            elementoComValor = elementoComValor.Direita;
+                        }  
                         else
                             Console.Write("0   ");
                         colunaAtual = colunaAtual.Direita;
                         contAuxCol++;
                     }
                     Console.WriteLine();
-                    ultimoValor = linhaAtual.Direita;
                     linhaAtual = linhaAtual.Abaixo;
+                    elementoComValor = linhaAtual.Direita;
                     contAuxCol = 1;
                 }
             }
@@ -121,14 +125,7 @@ public class MatrizEsparsa
                 while (contAuxLinhas <= dado.Linha)
                 {
                     if (contAuxLinhas == dado.Linha)
-                    {
                         linhaProcurada = atual;
-                        atual = linhaProcurada;
-                        if (atual.Direita.Valor == dado.Valor && atual.Direita != atual)
-                            linhaProcurada = atual;
-                        else
-                            atual = atual.Direita;
-                    }
                     else
                         atual = atual.Abaixo;
                     contAuxLinhas++;
@@ -142,9 +139,22 @@ public class MatrizEsparsa
                         atual = atual.Direita;
                     contAuxColunas++;
                 }
+                atual = linhaProcurada;
+                while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                {
+                    if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
+                    {
+                        linhaProcurada = atual.Direita;
+                        colunaProcurada = atual.Direita;
+                        achou = true;
+                    }
+                    else
+                    {
+                        celulaLinhaAnterior = atual;
+                        atual = atual.Direita;
+                    }
+                }
             }
-            if (linhaProcurada.Valor != 0 && colunaProcurada.Valor != 0)
-                achou = true;
         }
         return achou;
     }
@@ -193,7 +203,7 @@ public class MatrizEsparsa
         if(ExisteDado(dado, ref linhaDoElemento, ref colunaDoElemento))
         {
             Console.WriteLine();
-            Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna);
+            Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna + " "+ linhaDoElemento.Valor );
         }
     }
 

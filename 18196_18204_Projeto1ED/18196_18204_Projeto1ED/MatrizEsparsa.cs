@@ -9,7 +9,7 @@ public class MatrizEsparsa
 {
     int linhas, colunas;
     //Nó -1 e -1
-    Celula noCabeca;
+    Celula noCabeca, ultimaLinhaAdicionada, ultimaColunaAdicionada, celulaLinhaAnterior, celulaColunaAnterior;
     bool primeiraLeitura;
 
     const int tamanhoNumero = 4;
@@ -17,8 +17,9 @@ public class MatrizEsparsa
     public MatrizEsparsa()
     {
         Linhas = Colunas = 0;
-        NoCabeca = null;
+        NoCabeca = celulaColunaAnterior = celulaLinhaAnterior = null;
         primeiraLeitura = true;
+        ultimaLinhaAdicionada = ultimaColunaAdicionada = null;
     }
 
     public int Linhas { get => linhas; set => linhas = value; }
@@ -28,7 +29,7 @@ public class MatrizEsparsa
     public bool LinhasVazias { get => NoCabeca.Abaixo == null; }
     public Celula NoCabeca { get => noCabeca; set => noCabeca = value; }
 
-    /*public void PrintarMatriz()
+    public void PrintarMatriz()
     {
         if (!EstaVazia)
         {
@@ -36,14 +37,18 @@ public class MatrizEsparsa
             {
                 Celula linhaAtual = NoCabeca.Abaixo;
                 Celula ultimoValor = linhaAtual.Direita;
+                Celula elementoComValor = linhaAtual.Direita;
                 int contAuxCol = 1;
                 while (linhaAtual != NoCabeca)
                 {
                     Celula colunaAtual = NoCabeca.Direita;
                     while (colunaAtual != NoCabeca)
                     {
-                        if (contAuxCol == ultimoValor.Coluna)
-                            Console.Write(ultimoValor.Valor.ToString().PadRight(4));
+                        if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
+                        {
+                            Console.Write(elementoComValor.Valor.ToString().PadRight(4));
+                            elementoComValor = elementoComValor.Direita;
+                        }
                         else
                             Console.Write("0   ");
                         colunaAtual = colunaAtual.Direita;
@@ -51,14 +56,14 @@ public class MatrizEsparsa
                     }
                     Console.WriteLine();
                     linhaAtual = linhaAtual.Abaixo;
-                    ultimoValor = linhaAtual.Direita;
+                    elementoComValor = linhaAtual.Direita;
                     contAuxCol = 1;
                 }
             }
         }
-    }*/
+    }
 
-    private void CriarNosCabecas(int qtdLinhas, int qtdColunas)
+    public void CriarNosCabecas(int qtdLinhas, int qtdColunas)
     {
         if (qtdLinhas > 1 && qtdColunas > 1)
         {
@@ -111,8 +116,7 @@ public class MatrizEsparsa
     public bool ExisteDado(Celula dado, ref Celula linhaProcurada, ref Celula colunaProcurada)
     {
         bool achou = false;
-
-        if (dado.Valor != 0)
+        if (!EstaVazia)
         {
             if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
             {
@@ -135,11 +139,23 @@ public class MatrizEsparsa
                         atual = atual.Direita;
                     contAuxColunas++;
                 }
+                atual = linhaProcurada;
+                while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                {
+                    if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
+                    {
+                        linhaProcurada = atual.Direita;
+                        colunaProcurada = atual.Direita;
+                        achou = true;
+                    }
+                    else
+                    {
+                        celulaLinhaAnterior = atual;
+                        atual = atual.Direita;
+                    }
+                }
             }
-            if (linhaProcurada.Valor == dado.Valor && colunaProcurada.Valor == dado.Valor)
-                achou = true;
         }
-
         return achou;
     }
 
@@ -151,7 +167,7 @@ public class MatrizEsparsa
             {
                 if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
                 {
-                    Celula ultimoLinhaAdicionada = null, ultimoColunaAdicionada = null, linhaAinserir = null, colunaAinserir = null;
+                    Celula linhaAinserir = null, colunaAinserir = null;
                     //Existe dado retorna o nó cabeca da linha e da coluna a inserir
                     if (!ExisteDado(dado, ref linhaAinserir, ref colunaAinserir))
                     {
@@ -160,18 +176,18 @@ public class MatrizEsparsa
                         if (linhaAinserir.Direita == linhaAinserir)
                             linhaAinserir.Direita = dado;
                         else
-                            ultimoLinhaAdicionada.Direita = dado;
+                            ultimaLinhaAdicionada.Direita = dado;
                         dado.Direita = linhaAinserir;
-                        ultimoLinhaAdicionada = dado;
+                        ultimaLinhaAdicionada = dado;
 
                         //2º insere na coluna
                         //se a coluna esta vazia
                         if (colunaAinserir.Abaixo == colunaAinserir)
                             colunaAinserir.Abaixo = dado;
                         else
-                            ultimoColunaAdicionada.Direita = dado;
+                            ultimaColunaAdicionada.Abaixo = dado;
                         dado.Abaixo = colunaAinserir;
-                        ultimoColunaAdicionada = dado;
+                        ultimaColunaAdicionada = dado;
                     }
                 }
             }
@@ -182,7 +198,13 @@ public class MatrizEsparsa
 
     public void Remover(Celula dado)
     {
-
+        Celula linhaDoElemento = null, colunaDoElemento = null;
+        //Só deleta um elemento se ele existe
+        if (ExisteDado(dado, ref linhaDoElemento, ref colunaDoElemento))
+        {
+            Console.WriteLine();
+            Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna + " " + linhaDoElemento.Valor);
+        }
     }
 
     public void LerRegistro(StreamReader arquivo)
