@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 public class MatrizEsparsa
 {
@@ -29,7 +30,7 @@ public class MatrizEsparsa
     public bool LinhasVazias { get => NoCabeca.Abaixo == null; }
     public Celula NoCabeca { get => noCabeca; set => noCabeca = value; }
 
-    public void PrintarMatriz()
+    public void PrintarMatriz(DataGridView dgvMatriz)
     {
         if (!EstaVazia)
         {
@@ -46,11 +47,12 @@ public class MatrizEsparsa
                     {
                         if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
                         {
-                            Console.Write(elementoComValor.Valor.ToString().PadRight(4));
+                            //Console.Write(elementoComValor.Valor.ToString().PadRight(4));
+                            dgvMatriz.Rows.Add(elementoComValor.Valor);
                             elementoComValor = elementoComValor.Direita;
                         }
                         else
-                            Console.Write("0   ");
+                            dgvMatriz.Rows.Add(0);
                         colunaAtual = colunaAtual.Direita;
                         contAuxCol++;
                     }
