@@ -12,3 +12,6 @@ a pensar no método de remover os elementos da matriz também
 
 - 27/03 - Método ExisteDado(), InserirDado() E PrintarMatriz() aparentemente funcionando corretamente; começaremos 
 também a fazer o método RemoverDado()
+
+- 29/03 - Acabei de fazer o método pra printar a matriz no dataGridView, agora falta o método remover, o de ler arquivo e as
+operações
