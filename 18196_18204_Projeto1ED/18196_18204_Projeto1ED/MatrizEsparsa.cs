@@ -25,7 +25,7 @@ public class MatrizEsparsa
 
     public int Linhas { get => linhas; set => linhas = value; }
     public int Colunas { get => colunas; set => colunas = value; }
-    public bool EstaVazia { get => NoCabeca.Direita == null && NoCabeca.Abaixo == null; }
+    public bool EstaVazia { get => NoCabeca == null && NoCabeca == null; }
     public bool ColunasVazias { get => NoCabeca.Direita == null; }
     public bool LinhasVazias { get => NoCabeca.Abaixo == null; }
     public Celula NoCabeca { get => noCabeca; set => noCabeca = value; }
@@ -37,9 +37,11 @@ public class MatrizEsparsa
             if (Linhas != 0 && Colunas != 0)
             {
                 Celula linhaAtual = NoCabeca.Abaixo;
-                Celula ultimoValor = linhaAtual.Direita;
                 Celula elementoComValor = linhaAtual.Direita;
+                dgvMatriz.RowCount = Linhas;
+                dgvMatriz.ColumnCount = Colunas;
                 int contAuxCol = 1;
+                int contAuxLinha = 1;
                 while (linhaAtual != NoCabeca)
                 {
                     Celula colunaAtual = NoCabeca.Direita;
@@ -47,18 +49,17 @@ public class MatrizEsparsa
                     {
                         if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
                         {
-                            //Console.Write(elementoComValor.Valor.ToString().PadRight(4));
-                            dgvMatriz.Rows.Add(elementoComValor.Valor);
+                            dgvMatriz.Rows[contAuxCol - 1].Cells[contAuxLinha - 1].Value = elementoComValor.Valor;
                             elementoComValor = elementoComValor.Direita;
                         }
                         else
-                            dgvMatriz.Rows.Add(0);
+                            dgvMatriz.Rows[contAuxLinha - 1].Cells[contAuxCol - 1].Value = 0;
                         colunaAtual = colunaAtual.Direita;
                         contAuxCol++;
                     }
-                    Console.WriteLine();
                     linhaAtual = linhaAtual.Abaixo;
                     elementoComValor = linhaAtual.Direita;
+                    contAuxLinha++;
                     contAuxCol = 1;
                 }
             }
@@ -103,6 +104,12 @@ public class MatrizEsparsa
                     contAuxColunas++;
                 }
             }
+            else
+            {
+                NoCabeca = null;
+                CriarNosCabecas(qtdLinhas, qtdColunas);
+            }
+                
         }
     }
 
@@ -191,6 +198,8 @@ public class MatrizEsparsa
                         dado.Abaixo = colunaAinserir;
                         ultimaColunaAdicionada = dado;
                     }
+                    else
+                        linhaAinserir.Valor = dado.Valor;
                 }
             }
             else
