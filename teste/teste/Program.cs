@@ -11,7 +11,7 @@ namespace teste
         static void Main(string[] args)
         {
             var matriz = new MatrizEsparsa();
-            matriz.CriarNosCabecas(1000,1000);
+            matriz.CriarNosCabecas(10,10);
 
             Celula val = new Celula(null, null, 1, 1, 20);
             Celula val2 = new Celula(null, null, 1, 2, 20);
@@ -31,10 +31,10 @@ namespace teste
             matriz.InserirCelulaMatriz(valor5);
             matriz.InserirCelulaMatriz(valor6);
             matriz.InserirCelulaMatriz(valor7);
+            matriz.PrintarMatriz();
+            Celula valor = new Celula(null, null, 5, 6, 0);
+            matriz.InserirCelulaMatriz(valor);
 
-            //Celula valor = new Celula(null, null, 5, 6, 0);
-            //matriz.InserirCelulaMatriz(valor);
-            //matriz.PrintarMatriz();
             Console.ReadLine();
         }
     }

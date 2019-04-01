@@ -120,8 +120,10 @@ public class MatrizEsparsa
         {
             if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
             {
-                Celula atual = NoCabeca.Abaixo;
+                Celula atual = NoCabeca.Abaixo, atualColuna = NoCabeca.Direita;
                 int contAuxLinhas = 1, contAuxColunas = 1;
+                celulaColunaAnterior = NoCabeca.Direita;
+                celulaLinhaAnterior = NoCabeca.Abaixo;
                 while (contAuxLinhas <= dado.Linha)
                 {
                     if (contAuxLinhas == dado.Linha)
@@ -130,16 +132,16 @@ public class MatrizEsparsa
                         atual = atual.Abaixo;
                     contAuxLinhas++;
                 }
-                atual = NoCabeca.Direita;
                 while (contAuxColunas <= dado.Coluna)
                 {
                     if (contAuxColunas == dado.Coluna)
-                        colunaProcurada = atual;
+                        colunaProcurada = atualColuna;
                     else
-                        atual = atual.Direita;
+                        atualColuna = atualColuna.Direita;
                     contAuxColunas++;
                 }
                 atual = linhaProcurada;
+                atualColuna = colunaProcurada;
                 while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
@@ -147,11 +149,14 @@ public class MatrizEsparsa
                         linhaProcurada = atual.Direita;
                         colunaProcurada = atual.Direita;
                         achou = true;
+                        break;
                     }
                     else
                     {
                         celulaLinhaAnterior = atual;
+                        celulaColunaAnterior = atualColuna;
                         atual = atual.Direita;
+                        atualColuna = atualColuna.Abaixo;
                     }
                 }
             }
@@ -204,6 +209,10 @@ public class MatrizEsparsa
         {
             Console.WriteLine();
             Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna + " "+ linhaDoElemento.Valor );
+            Console.WriteLine("Linha ant");
+            Console.WriteLine(celulaLinhaAnterior.Linha + " " + celulaLinhaAnterior.Coluna + " " + celulaLinhaAnterior.Valor);
+            Console.WriteLine("Coluna ant");
+            Console.WriteLine(celulaColunaAnterior.Linha + " " + celulaColunaAnterior.Coluna + " " + celulaColunaAnterior.Valor);
         }
     }
 
