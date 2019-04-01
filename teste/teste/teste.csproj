@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Celula.cs" />
-    <Compile Include="ListaCircular.cs" />
     <Compile Include="MatrizEsparsa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

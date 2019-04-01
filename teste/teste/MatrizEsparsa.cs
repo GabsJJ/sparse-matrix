@@ -17,7 +17,8 @@ public class MatrizEsparsa
     public MatrizEsparsa()
     {
         Linhas = Colunas = 0;
-        NoCabeca = celulaColunaAnterior = celulaLinhaAnterior = null;
+        NoCabeca = null;
+        celulaColunaAnterior = celulaLinhaAnterior = null;
         primeiraLeitura = true;
         ultimaLinhaAdicionada = ultimaColunaAdicionada = null;
     }
@@ -124,6 +125,7 @@ public class MatrizEsparsa
                 int contAuxLinhas = 1, contAuxColunas = 1;
                 celulaColunaAnterior = NoCabeca.Direita;
                 celulaLinhaAnterior = NoCabeca.Abaixo;
+                //Procura os nós cabeça correspondentes aos do elemento e guarda nas variáveis, linhaProcurada, colunaProcurada
                 while (contAuxLinhas <= dado.Linha)
                 {
                     if (contAuxLinhas == dado.Linha)
@@ -140,8 +142,8 @@ public class MatrizEsparsa
                         atualColuna = atualColuna.Direita;
                     contAuxColunas++;
                 }
+                //Procura a célula do elemento procurado e também a celula anterior na mesma linha que o elemento em si
                 atual = linhaProcurada;
-                atualColuna = colunaProcurada;
                 while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
@@ -156,6 +158,22 @@ public class MatrizEsparsa
                         celulaLinhaAnterior = atual;
                         celulaColunaAnterior = atualColuna;
                         atual = atual.Direita;
+                        atualColuna = atualColuna.Abaixo;
+                    }
+                }
+                //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
+                atualColuna = colunaProcurada;
+                while (atualColuna.Abaixo != colunaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                {
+                    if (atualColuna.Abaixo.Linha == dado.Linha && atualColuna.Abaixo.Coluna == dado.Coluna)
+                    {
+                        colunaProcurada = atualColuna.Abaixo;
+                        achou = true;
+                        break;
+                    }
+                    else
+                    {
+                        celulaColunaAnterior = atualColuna;
                         atualColuna = atualColuna.Abaixo;
                     }
                 }
@@ -181,18 +199,16 @@ public class MatrizEsparsa
                         if (linhaAinserir.Direita == linhaAinserir)
                             linhaAinserir.Direita = dado;
                         else
-                            ultimaLinhaAdicionada.Direita = dado;
+                            celulaLinhaAnterior.Direita = dado;
                         dado.Direita = linhaAinserir;
-                        ultimaLinhaAdicionada = dado;
 
                         //2º insere na coluna
                         //se a coluna esta vazia
                         if (colunaAinserir.Abaixo == colunaAinserir)
                             colunaAinserir.Abaixo = dado;
                         else
-                            ultimaColunaAdicionada.Abaixo = dado;
+                            celulaColunaAnterior.Abaixo = dado;
                         dado.Abaixo = colunaAinserir;
-                        ultimaColunaAdicionada = dado;
                     }
                 }
             }
