@@ -28,12 +28,37 @@ namespace _18196_18204_Projeto1ED
         private void btnLerArq1_Click(object sender, EventArgs e)
         {
             if(dlgMatriz1.ShowDialog() == DialogResult.OK)
+                LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
+            matriz1.PrintarMatriz(dgvMatriz1);
+        }
+
+        private void btnLerArq2_Click(object sender, EventArgs e)
+        {
+            if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
+            matriz2.PrintarMatriz(dgvMatriz2);
+        }
+
+        private void LerArquivo(StreamReader arq, MatrizEsparsa mat)
+        {
+            bool primeiraLeitura = true;
+            string linha = "";
+            string[] chars;
+            while (!arq.EndOfStream)
             {
-                var arq = new StreamReader(dlgMatriz1.FileName);
-                matriz1.CriarMatriz(arq);
-                nudColunas1.Enabled = false;
-                nudLinhas1.Enabled = false;
-            } 
+                if(primeiraLeitura)
+                {
+                    linha = arq.ReadLine();
+                    chars = linha.Split(';');
+                    mat.CriarNosCabecas(int.Parse(chars[0]), int.Parse(chars[1]));
+                    primeiraLeitura = false;
+                }
+                else
+                {
+                    var celulaNova = Celula.LerRegistro(arq);
+                    mat.InserirCelulaMatriz(celulaNova);
+                }
+            }
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
@@ -73,7 +98,7 @@ namespace _18196_18204_Projeto1ED
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes.SelectedIndex == 0)
+            if (cbxMatrizes.SelectedText == "1")
             {
                 if(txtValor.Text.Trim() != "")
                 {
@@ -97,7 +122,7 @@ namespace _18196_18204_Projeto1ED
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes2.SelectedIndex == 0)
+            if (cbxMatrizes2.SelectedText == "1")
             {
                 string val = "";
                 matriz1.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
@@ -111,15 +136,6 @@ namespace _18196_18204_Projeto1ED
                     int.Parse(nudColunas4.Value.ToString()), ref val);
                 lblRetorno.Text = val;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dlgMatriz2.ShowDialog() == DialogResult.OK)
-            {
-                nudColunas1.Enabled = false;
-                nudLinhas1.Enabled = false;
-            } 
         }
     }
 }

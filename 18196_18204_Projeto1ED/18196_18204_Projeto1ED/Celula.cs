@@ -56,8 +56,22 @@ public class Celula : IComparable<Celula>
         return "Linha: " + linha + " Coluna: " + coluna + " Valor: " + valor;
     }
 
-    public Celula LerRegistro(StreamReader arq)
+    public static Celula LerRegistro(StreamReader arq)
     {
-        return null;
+        Celula novo = null;
+        if (!arq.EndOfStream)
+        {
+            string linha = arq.ReadLine();
+            string[] chars = linha.Split(';');
+            int linhaElemento = int.Parse(chars[0]);
+            int colunaElemento = int.Parse(chars[1]);
+            int valorElemento;
+            if (chars.Length == 3)
+            {
+                valorElemento = int.Parse(chars[2]);
+                novo = new Celula(null, null, linhaElemento, colunaElemento, valorElemento);
+            }
+        }
+        return novo;
     }
 }

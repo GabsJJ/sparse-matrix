@@ -11,15 +11,12 @@ public class MatrizEsparsa
     int linhas, colunas;
     //Nó -1 e -1
     Celula noCabeca, celulaLinhaAnterior, celulaColunaAnterior;
-    bool primeiraLeitura;
-
     const int tamanhoNumero = 4;
 
     public MatrizEsparsa()
     {
         Linhas = Colunas = 0;
         NoCabeca = celulaColunaAnterior = celulaLinhaAnterior = null;
-        primeiraLeitura = true;
     }
 
     public int Linhas { get => linhas; set => linhas = value; }
@@ -109,15 +106,6 @@ public class MatrizEsparsa
                 CriarNosCabecas(qtdLinhas, qtdColunas);
             }
                 
-        }
-    }
-
-    public void CriarMatriz(StreamReader arquivo)
-    {
-        int contAuxLinhas = 0, contAuxColunas = 0;
-        while (contAuxColunas < Colunas)
-        {
-            //vai utilizar o método de criar nós cabeca
         }
     }
 
@@ -257,18 +245,6 @@ public class MatrizEsparsa
             resultado = "Valor: " + linhaDoElemento.Valor.ToString();
         else
             resultado = "Valor: Nada encontrado";
-    }
-
-    public void LerRegistro(StreamReader arquivo)
-    {
-        if (!arquivo.EndOfStream)
-        {
-            string linha = arquivo.ReadLine();
-            if (primeiraLeitura)
-            {
-                linhas = int.Parse(linha.Substring(0, 1));
-            }
-        }
     }
 }
 

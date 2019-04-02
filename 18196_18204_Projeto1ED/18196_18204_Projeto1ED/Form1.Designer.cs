@@ -54,7 +54,6 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dlgMatriz1 = new System.Windows.Forms.OpenFileDialog();
-            this.dlgMatriz2 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnPrintar2 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -63,7 +62,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.nudLinhas2 = new System.Windows.Forms.NumericUpDown();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnLerArq2 = new System.Windows.Forms.Button();
             this.btnCriar2 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -371,6 +370,10 @@
             // 
             // dgvMatriz2
             // 
+            this.dgvMatriz2.AllowUserToAddRows = false;
+            this.dgvMatriz2.AllowUserToDeleteRows = false;
+            this.dgvMatriz2.AllowUserToResizeColumns = false;
+            this.dgvMatriz2.AllowUserToResizeRows = false;
             this.dgvMatriz2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatriz2.Location = new System.Drawing.Point(396, 235);
             this.dgvMatriz2.Name = "dgvMatriz2";
@@ -398,10 +401,6 @@
             // 
             this.dlgMatriz1.FileName = "openFileDialog1";
             // 
-            // dlgMatriz2
-            // 
-            this.dlgMatriz2.FileName = "openFileDialog2";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btnPrintar2);
@@ -411,7 +410,7 @@
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.nudLinhas2);
-            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.btnLerArq2);
             this.groupBox4.Controls.Add(this.btnCriar2);
             this.groupBox4.Location = new System.Drawing.Point(222, 12);
             this.groupBox4.Name = "groupBox4";
@@ -510,15 +509,15 @@
             0,
             0});
             // 
-            // button3
+            // btnLerArq2
             // 
-            this.button3.Location = new System.Drawing.Point(6, 46);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(92, 28);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Ler arquivo";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btnLerArq1_Click);
+            this.btnLerArq2.Location = new System.Drawing.Point(6, 46);
+            this.btnLerArq2.Name = "btnLerArq2";
+            this.btnLerArq2.Size = new System.Drawing.Size(92, 28);
+            this.btnLerArq2.TabIndex = 1;
+            this.btnLerArq2.Text = "Ler arquivo";
+            this.btnLerArq2.UseVisualStyleBackColor = true;
+            this.btnLerArq2.Click += new System.EventHandler(this.btnLerArq2_Click);
             // 
             // btnCriar2
             // 
@@ -736,7 +735,6 @@
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.OpenFileDialog dlgMatriz1;
-        private System.Windows.Forms.OpenFileDialog dlgMatriz2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
@@ -744,7 +742,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown nudLinhas2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnLerArq2;
         private System.Windows.Forms.Button btnCriar2;
         private System.Windows.Forms.Button btnPrintar1;
         private System.Windows.Forms.Button btnPrintar2;
