@@ -13,6 +13,7 @@ namespace teste
             var matriz = new MatrizEsparsa();
             matriz.CriarNosCabecas(10,10);
 
+            
             Celula val = new Celula(null, null, 1, 1, 20);
             Celula val2 = new Celula(null, null, 1, 2, 20);
             Celula valor1 = new Celula(null, null, 5, 1, 20);
@@ -24,8 +25,9 @@ namespace teste
             Celula valor7 = new Celula(null, null, 5, 7, -2);
             Celula valor8 = new Celula(null, null, 7, 3, 666);
             Celula valor9 = new Celula(null, null, 8, 8, 666);
-            matriz.InserirCelulaMatriz(val);
             matriz.InserirCelulaMatriz(val2);
+            matriz.InserirCelulaMatriz(val);
+            
             matriz.InserirCelulaMatriz(valor1);
             matriz.InserirCelulaMatriz(valor2);
             matriz.InserirCelulaMatriz(valor3);
@@ -37,10 +39,10 @@ namespace teste
             matriz.InserirCelulaMatriz(valor9);
             matriz.PrintarMatriz();
 
-            Celula valor = new Celula(null, null, 8, 8, 0);
+            /*Celula valor = new Celula(null, null, 8, 8, 0);
             matriz.InserirCelulaMatriz(valor);
             Console.WriteLine();
-            matriz.PrintarMatriz();
+            matriz.PrintarMatriz();*/
 
             Console.ReadLine();
         }

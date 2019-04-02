@@ -151,25 +151,31 @@ public class MatrizEsparsa
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma linha que o elemento em si
                 atual = linhaProcurada;
-                while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                while (atual.Direita.Linha != linhaProcurada.Linha) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
                     {
                         linhaProcurada = atual.Direita;
                         achou = true;
                     }
-                    celulaLinhaAnterior = atual = atual.Direita;
+                    if (atual.Direita.Coluna < dado.Coluna)
+                        celulaLinhaAnterior = atual = atual.Direita;
+                    else
+                        break;
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
                 atualColuna = colunaProcurada;
-                while (atualColuna.Abaixo != colunaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                while (atualColuna.Abaixo.Coluna != colunaProcurada.Coluna) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atualColuna.Abaixo.Linha == dado.Linha && atualColuna.Abaixo.Coluna == dado.Coluna)
                     {
                         colunaProcurada = atualColuna.Abaixo;
                         achou = true;
                     }
-                    celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
+                    if (atualColuna.Abaixo.Linha < dado.Linha)
+                        celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
+                    else
+                        break;
                 }
             }
         }
@@ -192,6 +198,13 @@ public class MatrizEsparsa
                         //se a linha esta vazia
                         if (linhaAinserir.Direita == linhaAinserir)
                             linhaAinserir.Direita = dado;
+                        else if (celulaLinhaAnterior.Direita.Coluna > dado.Coluna)
+                        {
+                            var aux = celulaLinhaAnterior.Direita;
+                            celulaLinhaAnterior.Direita = dado;
+                            dado.Direita = aux;
+                            dado = aux;
+                        }
                         else
                             celulaLinhaAnterior.Direita = dado;
                         dado.Direita = linhaAinserir;
@@ -200,6 +213,13 @@ public class MatrizEsparsa
                         //se a coluna esta vazia
                         if (colunaAinserir.Abaixo == colunaAinserir)
                             colunaAinserir.Abaixo = dado;
+                        else if (celulaLinhaAnterior.Direita.Linha > dado.Linha)
+                        {
+                            var aux = celulaColunaAnterior;
+                            celulaColunaAnterior.Abaixo = dado;
+                            dado.Abaixo = aux;
+                            dado = aux;
+                        }
                         else
                             celulaColunaAnterior.Abaixo = dado;
                         dado.Abaixo = colunaAinserir;
