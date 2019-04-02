@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPrintar1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudColunas1 = new System.Windows.Forms.NumericUpDown();
@@ -55,6 +56,7 @@
             this.dlgMatriz1 = new System.Windows.Forms.OpenFileDialog();
             this.dlgMatriz2 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnPrintar2 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.nudColunas2 = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +65,17 @@
             this.nudLinhas2 = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
             this.btnCriar2 = new System.Windows.Forms.Button();
-            this.btnPrintar1 = new System.Windows.Forms.Button();
-            this.btnPrintar2 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbxMatrizes2 = new System.Windows.Forms.ComboBox();
+            this.lblRetorno = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nudColunas4 = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
+            this.btnPesquisar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -77,6 +88,9 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas2)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudColunas4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLinhas4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -96,6 +110,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criação da matriz 1";
+            // 
+            // btnPrintar1
+            // 
+            this.btnPrintar1.Location = new System.Drawing.Point(112, 184);
+            this.btnPrintar1.Name = "btnPrintar1";
+            this.btnPrintar1.Size = new System.Drawing.Size(70, 27);
+            this.btnPrintar1.TabIndex = 9;
+            this.btnPrintar1.Text = "Printar";
+            this.btnPrintar1.UseVisualStyleBackColor = true;
+            this.btnPrintar1.Click += new System.EventHandler(this.btnPrintar1_Click);
             // 
             // label4
             // 
@@ -209,7 +233,7 @@
             this.groupBox2.Controls.Add(this.nudColunas3);
             this.groupBox2.Controls.Add(this.cbxMatrizes);
             this.groupBox2.Controls.Add(this.nudLinhas3);
-            this.groupBox2.Location = new System.Drawing.Point(554, 12);
+            this.groupBox2.Location = new System.Drawing.Point(650, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(220, 217);
             this.groupBox2.TabIndex = 2;
@@ -344,7 +368,6 @@
             this.dgvMatriz1.ReadOnly = true;
             this.dgvMatriz1.Size = new System.Drawing.Size(378, 200);
             this.dgvMatriz1.TabIndex = 18;
-            this.dgvMatriz1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // dgvMatriz2
             // 
@@ -396,6 +419,16 @@
             this.groupBox4.TabIndex = 10;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Criação da matriz 2";
+            // 
+            // btnPrintar2
+            // 
+            this.btnPrintar2.Location = new System.Drawing.Point(109, 184);
+            this.btnPrintar2.Name = "btnPrintar2";
+            this.btnPrintar2.Size = new System.Drawing.Size(70, 27);
+            this.btnPrintar2.TabIndex = 10;
+            this.btnPrintar2.Text = "Printar";
+            this.btnPrintar2.UseVisualStyleBackColor = true;
+            this.btnPrintar2.Click += new System.EventHandler(this.btnPrintar2_Click);
             // 
             // label10
             // 
@@ -497,31 +530,149 @@
             this.btnCriar2.UseVisualStyleBackColor = true;
             this.btnCriar2.Click += new System.EventHandler(this.btnCriar2_Click);
             // 
-            // btnPrintar1
+            // groupBox5
             // 
-            this.btnPrintar1.Location = new System.Drawing.Point(112, 184);
-            this.btnPrintar1.Name = "btnPrintar1";
-            this.btnPrintar1.Size = new System.Drawing.Size(70, 27);
-            this.btnPrintar1.TabIndex = 9;
-            this.btnPrintar1.Text = "Printar";
-            this.btnPrintar1.UseVisualStyleBackColor = true;
-            this.btnPrintar1.Click += new System.EventHandler(this.btnPrintar1_Click);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.cbxMatrizes2);
+            this.groupBox5.Controls.Add(this.lblRetorno);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this.nudColunas4);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.nudLinhas4);
+            this.groupBox5.Controls.Add(this.btnPesquisar);
+            this.groupBox5.Location = new System.Drawing.Point(436, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(208, 217);
+            this.groupBox5.TabIndex = 11;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Pesquisa de itens";
             // 
-            // btnPrintar2
+            // label18
             // 
-            this.btnPrintar2.Location = new System.Drawing.Point(109, 184);
-            this.btnPrintar2.Name = "btnPrintar2";
-            this.btnPrintar2.Size = new System.Drawing.Size(70, 27);
-            this.btnPrintar2.TabIndex = 10;
-            this.btnPrintar2.Text = "Printar";
-            this.btnPrintar2.UseVisualStyleBackColor = true;
-            this.btnPrintar2.Click += new System.EventHandler(this.btnPrintar2_Click);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(116, 17);
+            this.label18.TabIndex = 14;
+            this.label18.Text = "Escolha a matriz:";
+            // 
+            // cbxMatrizes2
+            // 
+            this.cbxMatrizes2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxMatrizes2.FormattingEnabled = true;
+            this.cbxMatrizes2.Location = new System.Drawing.Point(9, 43);
+            this.cbxMatrizes2.Name = "cbxMatrizes2";
+            this.cbxMatrizes2.Size = new System.Drawing.Size(112, 24);
+            this.cbxMatrizes2.TabIndex = 13;
+            this.cbxMatrizes2.Click += new System.EventHandler(this.comboBox1_Click);
+            // 
+            // lblRetorno
+            // 
+            this.lblRetorno.AutoSize = true;
+            this.lblRetorno.Location = new System.Drawing.Point(6, 160);
+            this.lblRetorno.Name = "lblRetorno";
+            this.lblRetorno.Size = new System.Drawing.Size(45, 17);
+            this.lblRetorno.TabIndex = 12;
+            this.lblRetorno.Text = "Valor:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 90);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(152, 17);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "do elemento desejado:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 138);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 17);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Coluna";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 111);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(43, 17);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Linha";
+            // 
+            // nudColunas4
+            // 
+            this.nudColunas4.Location = new System.Drawing.Point(71, 136);
+            this.nudColunas4.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.nudColunas4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudColunas4.Name = "nudColunas4";
+            this.nudColunas4.Size = new System.Drawing.Size(60, 23);
+            this.nudColunas4.TabIndex = 6;
+            this.nudColunas4.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 70);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(160, 17);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Digite a linha e a coluna";
+            // 
+            // nudLinhas4
+            // 
+            this.nudLinhas4.Location = new System.Drawing.Point(71, 109);
+            this.nudLinhas4.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.nudLinhas4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLinhas4.Name = "nudLinhas4";
+            this.nudLinhas4.Size = new System.Drawing.Size(60, 23);
+            this.nudLinhas4.TabIndex = 3;
+            this.nudLinhas4.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnPesquisar
+            // 
+            this.btnPesquisar.Location = new System.Drawing.Point(9, 184);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(89, 27);
+            this.btnPesquisar.TabIndex = 0;
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // frmMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 649);
+            this.ClientSize = new System.Drawing.Size(883, 649);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.dataGridView3);
@@ -550,6 +701,10 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas2)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudColunas4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLinhas4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -593,6 +748,17 @@
         private System.Windows.Forms.Button btnCriar2;
         private System.Windows.Forms.Button btnPrintar1;
         private System.Windows.Forms.Button btnPrintar2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label lblRetorno;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nudColunas4;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown nudLinhas4;
+        private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbxMatrizes2;
     }
 }
 

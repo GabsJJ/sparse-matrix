@@ -15,3 +15,5 @@ também a fazer o método RemoverDado()
 
 - 29/03 - Acabei de fazer o método pra printar a matriz no dataGridView, agora falta o método remover, o de ler arquivo e as
 operações
+
+- 01/04

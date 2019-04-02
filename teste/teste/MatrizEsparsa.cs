@@ -9,7 +9,7 @@ public class MatrizEsparsa
 {
     int linhas, colunas;
     //Nó -1 e -1
-    Celula noCabeca, ultimaLinhaAdicionada, ultimaColunaAdicionada, celulaLinhaAnterior, celulaColunaAnterior;
+    Celula noCabeca, celulaLinhaAnterior, celulaColunaAnterior;
     bool primeiraLeitura;
 
     const int tamanhoNumero = 4;
@@ -20,7 +20,6 @@ public class MatrizEsparsa
         NoCabeca = null;
         celulaColunaAnterior = celulaLinhaAnterior = null;
         primeiraLeitura = true;
-        ultimaLinhaAdicionada = ultimaColunaAdicionada = null;
     }
 
     public int Linhas { get => linhas; set => linhas = value; }
@@ -149,17 +148,9 @@ public class MatrizEsparsa
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
                     {
                         linhaProcurada = atual.Direita;
-                        colunaProcurada = atual.Direita;
                         achou = true;
-                        break;
                     }
-                    else
-                    {
-                        celulaLinhaAnterior = atual;
-                        celulaColunaAnterior = atualColuna;
-                        atual = atual.Direita;
-                        atualColuna = atualColuna.Abaixo;
-                    }
+                    celulaLinhaAnterior = atual = atual.Direita;
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
                 atualColuna = colunaProcurada;
@@ -169,13 +160,8 @@ public class MatrizEsparsa
                     {
                         colunaProcurada = atualColuna.Abaixo;
                         achou = true;
-                        break;
                     }
-                    else
-                    {
-                        celulaColunaAnterior = atualColuna;
-                        atualColuna = atualColuna.Abaixo;
-                    }
+                    celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
                 }
             }
         }
@@ -223,12 +209,9 @@ public class MatrizEsparsa
         //Só deleta um elemento se ele existe
         if(ExisteDado(dado, ref linhaDoElemento, ref colunaDoElemento))
         {
-            Console.WriteLine();
-            Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna + " "+ linhaDoElemento.Valor );
-            Console.WriteLine("Linha ant");
-            Console.WriteLine(celulaLinhaAnterior.Linha + " " + celulaLinhaAnterior.Coluna + " " + celulaLinhaAnterior.Valor);
-            Console.WriteLine("Coluna ant");
-            Console.WriteLine(celulaColunaAnterior.Linha + " " + celulaColunaAnterior.Coluna + " " + celulaColunaAnterior.Valor);
+            celulaColunaAnterior.Abaixo = colunaDoElemento.Abaixo;
+            celulaLinhaAnterior.Direita = linhaDoElemento.Direita;
+            
         }
     }
 

@@ -22,6 +22,8 @@ namespace teste
             Celula valor5 = new Celula(null, null, 5, 5, 20);
             Celula valor6 = new Celula(null, null, 5, 6, 20);
             Celula valor7 = new Celula(null, null, 5, 7, -2);
+            Celula valor8 = new Celula(null, null, 7, 3, 666);
+            Celula valor9 = new Celula(null, null, 8, 8, 666);
             matriz.InserirCelulaMatriz(val);
             matriz.InserirCelulaMatriz(val2);
             matriz.InserirCelulaMatriz(valor1);
@@ -31,9 +33,14 @@ namespace teste
             matriz.InserirCelulaMatriz(valor5);
             matriz.InserirCelulaMatriz(valor6);
             matriz.InserirCelulaMatriz(valor7);
+            matriz.InserirCelulaMatriz(valor8);
+            matriz.InserirCelulaMatriz(valor9);
             matriz.PrintarMatriz();
-            Celula valor = new Celula(null, null, 5, 6, 0);
+
+            Celula valor = new Celula(null, null, 8, 8, 0);
             matriz.InserirCelulaMatriz(valor);
+            Console.WriteLine();
+            matriz.PrintarMatriz();
 
             Console.ReadLine();
         }

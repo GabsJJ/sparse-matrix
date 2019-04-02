@@ -19,11 +19,6 @@ namespace _18196_18204_Projeto1ED
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void frmMatriz_Load(object sender, EventArgs e)
         {
             matriz1 = new MatrizEsparsa();
@@ -45,12 +40,14 @@ namespace _18196_18204_Projeto1ED
         {
             matriz1.CriarNosCabecas(int.Parse(nudLinhas1.Value.ToString()),
                 int.Parse(nudColunas1.Value.ToString()));
+            matriz1.PrintarMatriz(dgvMatriz1);
         }
 
         private void btnCriar2_Click(object sender, EventArgs e)
         {
             matriz2.CriarNosCabecas(int.Parse(nudLinhas2.Value.ToString()),
                    int.Parse(nudColunas2.Value.ToString()));
+            matriz2.PrintarMatriz(dgvMatriz2);
         }
 
         private void btnPrintar1_Click(object sender, EventArgs e)
@@ -67,10 +64,11 @@ namespace _18196_18204_Projeto1ED
 
         private void comboBox1_Click(object sender, EventArgs e)
         {
-            if (!matriz1.EstaVazia && !cbxMatrizes.Items.Contains(1))
-                cbxMatrizes.Items.Add(1);
-            if(!matriz2.EstaVazia && !cbxMatrizes.Items.Contains(2))
-                cbxMatrizes.Items.Add(2);
+            var cbx = sender as ComboBox;
+            if (!matriz1.EstaVazia && !cbx.Items.Contains(1))
+                cbx.Items.Add(1);
+            if(!matriz2.EstaVazia && !cbx.Items.Contains(2))
+                cbx.Items.Add(2);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -82,13 +80,36 @@ namespace _18196_18204_Projeto1ED
                     var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()), 
                         int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
                     matriz1.InserirCelulaMatriz(valor);
+                    matriz1.PrintarMatriz(dgvMatriz1);
                 }
             }
             else
             {
-                var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                if (txtValor.Text.Trim() != "")
+                {
+                    var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
                         int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
-                matriz2.InserirCelulaMatriz(valor);
+                    matriz2.InserirCelulaMatriz(valor);
+                    matriz2.PrintarMatriz(dgvMatriz2);
+                }
+            }
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            if (cbxMatrizes2.SelectedIndex == 0)
+            {
+                string val = "";
+                matriz1.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
+                    int.Parse(nudColunas4.Value.ToString()), ref val);
+                lblRetorno.Text = val;
+            }
+            else
+            {
+                string val = "";
+                matriz2.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
+                    int.Parse(nudColunas4.Value.ToString()), ref val);
+                lblRetorno.Text = val;
             }
         }
 

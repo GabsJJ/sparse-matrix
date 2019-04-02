@@ -10,7 +10,7 @@ public class MatrizEsparsa
 {
     int linhas, colunas;
     //Nó -1 e -1
-    Celula noCabeca, ultimaLinhaAdicionada, ultimaColunaAdicionada, celulaLinhaAnterior, celulaColunaAnterior;
+    Celula noCabeca, celulaLinhaAnterior, celulaColunaAnterior;
     bool primeiraLeitura;
 
     const int tamanhoNumero = 4;
@@ -20,7 +20,6 @@ public class MatrizEsparsa
         Linhas = Colunas = 0;
         NoCabeca = celulaColunaAnterior = celulaLinhaAnterior = null;
         primeiraLeitura = true;
-        ultimaLinhaAdicionada = ultimaColunaAdicionada = null;
     }
 
     public int Linhas { get => linhas; set => linhas = value; }
@@ -49,7 +48,7 @@ public class MatrizEsparsa
                     {
                         if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
                         {
-                            dgvMatriz.Rows[contAuxCol - 1].Cells[contAuxLinha - 1].Value = elementoComValor.Valor;
+                            dgvMatriz.Rows[contAuxLinha - 1].Cells[contAuxCol - 1].Value = elementoComValor.Valor;
                             elementoComValor = elementoComValor.Direita;
                         }
                         else
@@ -106,7 +105,7 @@ public class MatrizEsparsa
             }
             else
             {
-                NoCabeca = null;
+                ExcluirTodaMatriz();
                 CriarNosCabecas(qtdLinhas, qtdColunas);
             }
                 
@@ -129,8 +128,11 @@ public class MatrizEsparsa
         {
             if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
             {
-                Celula atual = NoCabeca.Abaixo;
+                Celula atual = NoCabeca.Abaixo, atualColuna = NoCabeca.Direita;
                 int contAuxLinhas = 1, contAuxColunas = 1;
+                celulaColunaAnterior = NoCabeca.Direita;
+                celulaLinhaAnterior = NoCabeca.Abaixo;
+                //Procura os nós cabeça correspondentes aos do elemento e guarda nas variáveis, linhaProcurada, colunaProcurada
                 while (contAuxLinhas <= dado.Linha)
                 {
                     if (contAuxLinhas == dado.Linha)
@@ -139,29 +141,35 @@ public class MatrizEsparsa
                         atual = atual.Abaixo;
                     contAuxLinhas++;
                 }
-                atual = NoCabeca.Direita;
                 while (contAuxColunas <= dado.Coluna)
                 {
                     if (contAuxColunas == dado.Coluna)
-                        colunaProcurada = atual;
+                        colunaProcurada = atualColuna;
                     else
-                        atual = atual.Direita;
+                        atualColuna = atualColuna.Direita;
                     contAuxColunas++;
                 }
+                //Procura a célula do elemento procurado e também a celula anterior na mesma linha que o elemento em si
                 atual = linhaProcurada;
                 while (atual.Direita != linhaProcurada) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
                     {
                         linhaProcurada = atual.Direita;
-                        colunaProcurada = atual.Direita;
                         achou = true;
                     }
-                    else
+                    celulaLinhaAnterior = atual = atual.Direita;
+                }
+                //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
+                atualColuna = colunaProcurada;
+                while (atualColuna.Abaixo != colunaProcurada) //analogo: atual.direita != null (lista ligada simples)
+                {
+                    if (atualColuna.Abaixo.Linha == dado.Linha && atualColuna.Abaixo.Coluna == dado.Coluna)
                     {
-                        celulaLinhaAnterior = atual;
-                        atual = atual.Direita;
+                        colunaProcurada = atualColuna.Abaixo;
+                        achou = true;
                     }
+                    celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
                 }
             }
         }
@@ -185,21 +193,17 @@ public class MatrizEsparsa
                         if (linhaAinserir.Direita == linhaAinserir)
                             linhaAinserir.Direita = dado;
                         else
-                            ultimaLinhaAdicionada.Direita = dado;
+                            celulaLinhaAnterior.Direita = dado;
                         dado.Direita = linhaAinserir;
-                        ultimaLinhaAdicionada = dado;
 
                         //2º insere na coluna
                         //se a coluna esta vazia
                         if (colunaAinserir.Abaixo == colunaAinserir)
                             colunaAinserir.Abaixo = dado;
                         else
-                            ultimaColunaAdicionada.Abaixo = dado;
+                            celulaColunaAnterior.Abaixo = dado;
                         dado.Abaixo = colunaAinserir;
-                        ultimaColunaAdicionada = dado;
                     }
-                    else
-                        linhaAinserir.Valor = dado.Valor;
                 }
             }
             else
@@ -213,9 +217,26 @@ public class MatrizEsparsa
         //Só deleta um elemento se ele existe
         if (ExisteDado(dado, ref linhaDoElemento, ref colunaDoElemento))
         {
-            Console.WriteLine();
-            Console.WriteLine(linhaDoElemento.Linha + " " + colunaDoElemento.Coluna + " " + linhaDoElemento.Valor);
+            celulaColunaAnterior.Abaixo = colunaDoElemento.Abaixo;
+            celulaLinhaAnterior.Direita = linhaDoElemento.Direita;
         }
+    }
+
+    public void ExcluirTodaMatriz()
+    {
+        //O ponteiro cabeça não apontando mais ao cabeçalho de linhas e colunas, o garbage collector
+        //acaba por eliminando os ponteiros da estrutura da matriz da memória
+        NoCabeca = null;
+    }
+
+    public void Pesquisar(int linha, int coluna, ref string resultado)
+    {
+        var elemento = new Celula(null,null,linha,coluna,0);
+        Celula linhaDoElemento = null, colunaDoElemento = null;
+        if (ExisteDado(elemento, ref linhaDoElemento, ref colunaDoElemento))
+            resultado = "Valor: " + linhaDoElemento.Valor.ToString();
+        else
+            resultado = "Valor: Nada encontrado";
     }
 
     public void LerRegistro(StreamReader arquivo)
