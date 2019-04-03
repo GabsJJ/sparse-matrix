@@ -98,7 +98,7 @@ namespace _18196_18204_Projeto1ED
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes.SelectedText == "1")
+            if (cbxMatrizes.SelectedItem.ToString() == "1")
             {
                 if(txtValor.Text.Trim() != "")
                 {
@@ -116,6 +116,25 @@ namespace _18196_18204_Projeto1ED
                         int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
                     matriz2.InserirCelulaMatriz(valor);
                     matriz2.PrintarMatriz(dgvMatriz2);
+                }
+            }
+        }
+
+        private void btnSomar_Click(object sender, EventArgs e)
+        {
+            if(txtValor2.Text.Trim() == "")
+            {
+                if(cbxMatriz3.SelectedItem.ToString() == "1")
+                {
+                    matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()), 
+                        int.Parse(txtValor2.Text));
+                    matriz1.PrintarMatriz(dgvMatriz3);
+                }
+                else
+                {
+                    matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
+                                            int.Parse(txtValor2.Text));
+                    matriz2.PrintarMatriz(dgvMatriz3);
                 }
             }
         }

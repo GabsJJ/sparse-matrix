@@ -246,5 +246,29 @@ public class MatrizEsparsa
         else
             resultado = "Valor: Nada encontrado";
     }
-}
 
+    public void SomarConstanteColuna(int colunaAsomar, double constante)
+    {
+        int contAuxCol = 1;
+        var colunaAtual = NoCabeca.Direita;
+        while(contAuxCol <= colunaAtual.Coluna)
+        {
+            if (contAuxCol == colunaAtual.Coluna)
+            {
+                var celulaColunaAtual = colunaAtual.Abaixo;
+                double soma = 0;
+                while(celulaColunaAtual.Abaixo != colunaAtual)
+                {
+                    soma = celulaColunaAtual.Valor + constante;
+                    if (soma == 0)
+                        Remover(celulaColunaAtual);
+                    else
+                        celulaColunaAtual.Valor = soma;
+                }
+            }
+            else
+                colunaAtual = colunaAtual.Direita;
+            contAuxCol++;
+        }
+    }
+}
