@@ -22,4 +22,5 @@ operações
 
 - 03/04 - somar constante
 
-- 04/04
+- 04/04 - somar constante a coluna pronto
+

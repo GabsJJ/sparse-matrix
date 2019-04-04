@@ -239,8 +239,10 @@ public class MatrizEsparsa
 
     public void ExcluirTodaMatriz()
     {
-        //O ponteiro cabeça não apontando mais ao cabeçalho de linhas e colunas, o garbage collector
-        //acaba por eliminando os ponteiros da estrutura da matriz da memória
+        /*
+         * O ponteiro cabeça não apontando mais ao cabeçalho de linhas e colunas, o garbage collector
+         * acaba por eliminando os ponteiros da estrutura da matriz da memória
+        */
         NoCabeca = null;
     }
 
@@ -248,6 +250,10 @@ public class MatrizEsparsa
     {
         var elemento = new Celula(null,null,linha,coluna,0);
         Celula linhaDoElemento = null, colunaDoElemento = null;
+        /*
+         * ExisteDado retorna por referência, celulas correspondentes, ou aos nós cabeça
+         * do elemento, ou a celula da coluna e da linha do elemento em si caso ele exista
+         */
         if (ExisteDado(elemento, ref linhaDoElemento, ref colunaDoElemento))
             resultado = "Valor: " + linhaDoElemento.Valor.ToString();
         else
@@ -258,16 +264,21 @@ public class MatrizEsparsa
     {
         int contAuxCol = 1, contAuxLinha = 1;
         var colunaAtual = NoCabeca.Direita;
+        //Vai percorrer a matriz até achar a coluna correspondente a que o usuário deseja
         while(contAuxCol <= colunaAsomar)
         {
+            //Caso o valor do contador auxiliar seja igual ao da coluna procurada, adicionamos na coluna
+            //Senão, vamos para a coluna seguinte e implementamos o conAuxCol (contAuxCol = contador que indica a coluna atual)
             if (contAuxCol == colunaAsomar)
             {
+                //Caso achou a coluna correspondente, vai entrar em outra repetição abaixo
                 var celulaColunaAtual = colunaAtual.Abaixo;
                 double soma = 0;
-                while(celulaColunaAtual != colunaAtual)
+                while(contAuxLinha <= Linhas)
                 {
-                    if(celulaColunaAtual.Linha > contAuxLinha)
-                        InserirCelulaMatriz(new Celula(null,null,contAuxLinha,colunaAsomar,constante));
+                    //Se falta algum item na coluna, esse item será inserido (contAuxLinha = linha que o elemento deveria estar)
+                    if(celulaColunaAtual.Linha != contAuxLinha)
+                        InserirCelulaMatriz(new Celula(null, null, contAuxLinha, colunaAsomar, constante)); 
                     else
                     {
                         soma = celulaColunaAtual.Valor + constante;
@@ -275,9 +286,9 @@ public class MatrizEsparsa
                             Remover(celulaColunaAtual);
                         else
                             celulaColunaAtual.Valor = soma;
-                        contAuxLinha++;
+                        celulaColunaAtual = celulaColunaAtual.Abaixo;
                     }
-                    celulaColunaAtual = celulaColunaAtual.Abaixo;
+                    contAuxLinha++;
                 }
             }
             else
