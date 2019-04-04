@@ -19,3 +19,7 @@ operações
 - 01/04
 
 - 02/04 - 1 parte pronta
+
+- 03/04 - somar constante
+
+- 04/04

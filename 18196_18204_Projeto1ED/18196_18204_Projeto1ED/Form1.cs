@@ -122,7 +122,7 @@ namespace _18196_18204_Projeto1ED
 
         private void btnSomar_Click(object sender, EventArgs e)
         {
-            if(txtValor2.Text.Trim() == "")
+            if(txtValor2.Text.Trim() != "")
             {
                 if(cbxMatriz3.SelectedItem.ToString() == "1")
                 {
@@ -141,7 +141,7 @@ namespace _18196_18204_Projeto1ED
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes2.SelectedText == "1")
+            if (cbxMatrizes2.SelectedItem.ToString() == "1")
             {
                 string val = "";
                 matriz1.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),

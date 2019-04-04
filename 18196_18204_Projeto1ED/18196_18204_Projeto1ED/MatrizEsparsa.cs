@@ -145,6 +145,7 @@ public class MatrizEsparsa
                     {
                         linhaProcurada = atual.Direita;
                         achou = true;
+                        break;
                     }
                     if (atual.Direita.Coluna < dado.Coluna)
                         celulaLinhaAnterior = atual = atual.Direita;
@@ -159,6 +160,7 @@ public class MatrizEsparsa
                     {
                         colunaProcurada = atualColuna.Abaixo;
                         achou = true;
+                        break;
                     }
                     if (atualColuna.Abaixo.Linha < dado.Linha)
                         celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
@@ -179,6 +181,7 @@ public class MatrizEsparsa
                 if (dado.Coluna > 0 && dado.Linha > 0 && dado.Linha <= Linhas && dado.Coluna <= Colunas)
                 {
                     Celula linhaAinserir = null, colunaAinserir = null;
+                    Celula aux1 = dado;
                     //Existe dado retorna o nó cabeca da linha e da coluna a inserir
                     if (!ExisteDado(dado, ref linhaAinserir, ref colunaAinserir))
                     {
@@ -188,30 +191,34 @@ public class MatrizEsparsa
                             linhaAinserir.Direita = dado;
                         else if (celulaLinhaAnterior.Direita.Coluna > dado.Coluna)
                         {
-                            var aux = celulaLinhaAnterior.Direita;
+                            var aux2 = celulaLinhaAnterior.Direita;
                             celulaLinhaAnterior.Direita = dado;
-                            dado.Direita = aux;
-                            dado = aux;
+                            dado.Direita = aux2;
+                            dado = aux2;
                         }
                         else
                             celulaLinhaAnterior.Direita = dado;
                         dado.Direita = linhaAinserir;
+                        dado = aux1;
 
                         //2º insere na coluna
                         //se a coluna esta vazia
                         if (colunaAinserir.Abaixo == colunaAinserir)
                             colunaAinserir.Abaixo = dado;
-                        else if (celulaLinhaAnterior.Direita.Linha > dado.Linha)
+                        else if (celulaColunaAnterior.Abaixo.Linha > dado.Linha)
                         {
-                            var aux = celulaColunaAnterior;
+                            var aux2 = celulaColunaAnterior.Abaixo;
                             celulaColunaAnterior.Abaixo = dado;
-                            dado.Abaixo = aux;
-                            dado = aux;
+                            dado.Abaixo = aux2;
+                            dado = aux2;
                         }
                         else
                             celulaColunaAnterior.Abaixo = dado;
                         dado.Abaixo = colunaAinserir;
+                        dado = aux1;
                     }
+                    else
+                        linhaAinserir.Valor = dado.Valor;
                 }
             }
             else
@@ -249,21 +256,28 @@ public class MatrizEsparsa
 
     public void SomarConstanteColuna(int colunaAsomar, double constante)
     {
-        int contAuxCol = 1;
+        int contAuxCol = 1, contAuxLinha = 1;
         var colunaAtual = NoCabeca.Direita;
-        while(contAuxCol <= colunaAtual.Coluna)
+        while(contAuxCol <= colunaAsomar)
         {
-            if (contAuxCol == colunaAtual.Coluna)
+            if (contAuxCol == colunaAsomar)
             {
                 var celulaColunaAtual = colunaAtual.Abaixo;
                 double soma = 0;
-                while(celulaColunaAtual.Abaixo != colunaAtual)
+                while(celulaColunaAtual != colunaAtual)
                 {
-                    soma = celulaColunaAtual.Valor + constante;
-                    if (soma == 0)
-                        Remover(celulaColunaAtual);
+                    if(celulaColunaAtual.Linha > contAuxLinha)
+                        InserirCelulaMatriz(new Celula(null,null,contAuxLinha,colunaAsomar,constante));
                     else
-                        celulaColunaAtual.Valor = soma;
+                    {
+                        soma = celulaColunaAtual.Valor + constante;
+                        if (soma == 0)
+                            Remover(celulaColunaAtual);
+                        else
+                            celulaColunaAtual.Valor = soma;
+                        contAuxLinha++;
+                    }
+                    celulaColunaAtual = celulaColunaAtual.Abaixo;
                 }
             }
             else
