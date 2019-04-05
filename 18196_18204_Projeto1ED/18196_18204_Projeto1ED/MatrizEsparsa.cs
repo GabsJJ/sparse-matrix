@@ -105,7 +105,6 @@ public class MatrizEsparsa
                 ExcluirTodaMatriz();
                 CriarNosCabecas(qtdLinhas, qtdColunas);
             }
-                
         }
     }
 
@@ -243,6 +242,8 @@ public class MatrizEsparsa
          * O ponteiro cabeça não apontando mais ao cabeçalho de linhas e colunas, o garbage collector
          * acaba por eliminando os ponteiros da estrutura da matriz da memória
         */
+        NoCabeca.Direita = NoCabeca;
+        NoCabeca.Abaixo = NoCabeca;
         NoCabeca = null;
     }
 
@@ -295,5 +296,60 @@ public class MatrizEsparsa
                 colunaAtual = colunaAtual.Direita;
             contAuxCol++;
         }
+    }
+
+    public MatrizEsparsa SomarDuasMatrizes(MatrizEsparsa outra)
+    {
+        var matNova = new MatrizEsparsa();
+        matNova.CriarNosCabecas(Linhas, Colunas);
+
+        int contAuxLinha = 1, contAuxColuna = 1;
+        var linhaAtual      = NoCabeca.Abaixo;
+        var linhaAtualOutra = outra.NoCabeca.Abaixo;
+
+        var celulaLinhaMatrizAtual = linhaAtual.Direita;
+        var celulaLinhaOutraMatriz = linhaAtualOutra.Direita;
+        while (contAuxLinha <= Linhas)
+        {
+            while(contAuxColuna <= Colunas)
+            {
+                if (celulaLinhaMatrizAtual.Coluna == contAuxColuna && celulaLinhaMatrizAtual.Linha == contAuxLinha)
+                {
+                    if (celulaLinhaOutraMatriz.Coluna == contAuxColuna && celulaLinhaOutraMatriz.Linha == contAuxLinha)
+                    {
+                        var cel = new Celula(null, null, contAuxLinha, contAuxColuna,
+                        (celulaLinhaMatrizAtual.Valor + celulaLinhaOutraMatriz.Valor));
+                        matNova.InserirCelulaMatriz(cel);
+                        celulaLinhaMatrizAtual = celulaLinhaMatrizAtual.Direita;
+                        celulaLinhaOutraMatriz = celulaLinhaOutraMatriz.Direita;
+                    }
+                    else
+                    {
+                        var cel = new Celula(null, null, contAuxLinha, contAuxColuna, celulaLinhaMatrizAtual.Valor);
+                        matNova.InserirCelulaMatriz(cel);
+                        celulaLinhaMatrizAtual = celulaLinhaMatrizAtual.Direita;
+                    }
+                }
+                else
+                {
+                    if (celulaLinhaOutraMatriz.Coluna == contAuxColuna && celulaLinhaOutraMatriz.Linha == contAuxLinha)
+                    {
+                        var cel = new Celula(null, null, contAuxLinha, contAuxColuna, celulaLinhaOutraMatriz.Valor);
+                        matNova.InserirCelulaMatriz(cel);
+                        celulaLinhaOutraMatriz = celulaLinhaOutraMatriz.Direita;
+                    }
+                }
+                contAuxColuna++;
+            }
+            linhaAtual = linhaAtual.Abaixo;
+            linhaAtualOutra = linhaAtualOutra.Abaixo;
+
+            celulaLinhaMatrizAtual = linhaAtual.Direita;
+            celulaLinhaOutraMatriz = linhaAtualOutra.Direita;
+
+            contAuxLinha++;
+            contAuxColuna = 1;
+        }
+        return matNova;
     }
 }

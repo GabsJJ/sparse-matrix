@@ -27,16 +27,45 @@ namespace _18196_18204_Projeto1ED
 
         private void btnLerArq1_Click(object sender, EventArgs e)
         {
-            if(dlgMatriz1.ShowDialog() == DialogResult.OK)
-                LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
-            matriz1.PrintarMatriz(dgvMatriz1);
+            if (!matriz1.EstaVazia)
+            {
+                var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
+                    matriz1.PrintarMatriz(dgvMatriz1);
+                }
+            }
+            else
+            {
+                if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                    LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
+                matriz1.PrintarMatriz(dgvMatriz1);
+            }
+            
         }
 
         private void btnLerArq2_Click(object sender, EventArgs e)
         {
-            if (dlgMatriz1.ShowDialog() == DialogResult.OK)
-                LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
-            matriz2.PrintarMatriz(dgvMatriz2);
+            if (!matriz1.EstaVazia)
+            {
+                var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
+                    matriz2.PrintarMatriz(dgvMatriz2);
+                }
+            }
+            else
+            {
+                if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                    LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
+                matriz2.PrintarMatriz(dgvMatriz2);
+            }
         }
 
         private void LerArquivo(StreamReader arq, MatrizEsparsa mat)
@@ -63,16 +92,44 @@ namespace _18196_18204_Projeto1ED
 
         private void btnCriar_Click(object sender, EventArgs e)
         {
-            matriz1.CriarNosCabecas(int.Parse(nudLinhas1.Value.ToString()),
-                int.Parse(nudColunas1.Value.ToString()));
-            matriz1.PrintarMatriz(dgvMatriz1);
+            if (!matriz1.EstaVazia)
+            {
+                var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(result == DialogResult.Yes)
+                {
+                    matriz1.CriarNosCabecas(int.Parse(nudLinhas1.Value.ToString()),
+                                    int.Parse(nudColunas1.Value.ToString()));
+                    matriz1.PrintarMatriz(dgvMatriz1);
+                }
+            }
+            else
+            {
+                matriz1.CriarNosCabecas(int.Parse(nudLinhas1.Value.ToString()),
+                                    int.Parse(nudColunas1.Value.ToString()));
+                matriz1.PrintarMatriz(dgvMatriz1);
+            }
         }
 
         private void btnCriar2_Click(object sender, EventArgs e)
         {
-            matriz2.CriarNosCabecas(int.Parse(nudLinhas2.Value.ToString()),
-                   int.Parse(nudColunas2.Value.ToString()));
-            matriz2.PrintarMatriz(dgvMatriz2);
+            if (!matriz2.EstaVazia)
+            {
+                var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    matriz2.CriarNosCabecas(int.Parse(nudLinhas2.Value.ToString()),
+                                    int.Parse(nudColunas2.Value.ToString()));
+                    matriz2.PrintarMatriz(dgvMatriz2);
+                }
+            }
+            else
+            {
+                matriz2.CriarNosCabecas(int.Parse(nudLinhas2.Value.ToString()),
+                                    int.Parse(nudColunas2.Value.ToString()));
+                matriz2.PrintarMatriz(dgvMatriz2);
+            }
         }
 
         private void btnPrintar1_Click(object sender, EventArgs e)
@@ -128,15 +185,38 @@ namespace _18196_18204_Projeto1ED
                 {
                     matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()), 
                         int.Parse(txtValor2.Text));
-                    matriz1.PrintarMatriz(dgvMatriz3);
+                    matriz1.PrintarMatriz(dgvMatriz1);
                 }
                 else
                 {
                     matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
                                             int.Parse(txtValor2.Text));
-                    matriz2.PrintarMatriz(dgvMatriz3);
+                    matriz2.PrintarMatriz(dgvMatriz2);
                 }
             }
+        }
+
+        private void btnSomarDuasMatrizes_Click(object sender, EventArgs e)
+        {
+            if(!matriz1.EstaVazia && !matriz2.EstaVazia)
+            {
+                if(matriz1.Linhas == matriz2.Linhas && matriz1.Colunas == matriz2.Colunas)
+                {
+                    var mat3 = matriz1.SomarDuasMatrizes(matriz2);
+                    mat3.PrintarMatriz(dgvMatriz3);
+                }
+                else
+                    MessageBox.Show("As matrizes devem ter a mesma ordem!", "Alerta",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+                MessageBox.Show("As matrizes devem não podem estar vazias!", "Alerta",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void btnMulti_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e)

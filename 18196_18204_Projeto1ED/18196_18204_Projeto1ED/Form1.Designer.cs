@@ -83,6 +83,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnSomarDuasMatrizes = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnMulti = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -400,11 +404,15 @@
             this.dgvMatriz3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatriz3.Location = new System.Drawing.Point(396, 441);
             this.dgvMatriz3.Name = "dgvMatriz3";
-            this.dgvMatriz3.Size = new System.Drawing.Size(378, 200);
+            this.dgvMatriz3.Size = new System.Drawing.Size(378, 231);
             this.dgvMatriz3.TabIndex = 20;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnMulti);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.btnSomarDuasMatrizes);
+            this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.cbxMatriz3);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.label21);
@@ -415,7 +423,7 @@
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Location = new System.Drawing.Point(12, 441);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(378, 196);
+            this.groupBox3.Size = new System.Drawing.Size(378, 231);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Operações";
@@ -774,11 +782,49 @@
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 112);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(164, 17);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Somar as duas Matrizes:";
+            // 
+            // btnSomarDuasMatrizes
+            // 
+            this.btnSomarDuasMatrizes.Location = new System.Drawing.Point(6, 132);
+            this.btnSomarDuasMatrizes.Name = "btnSomarDuasMatrizes";
+            this.btnSomarDuasMatrizes.Size = new System.Drawing.Size(75, 27);
+            this.btnSomarDuasMatrizes.TabIndex = 24;
+            this.btnSomarDuasMatrizes.Text = "Somar";
+            this.btnSomarDuasMatrizes.UseVisualStyleBackColor = true;
+            this.btnSomarDuasMatrizes.Click += new System.EventHandler(this.btnSomarDuasMatrizes_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 172);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(163, 17);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "Multiplicar duas Matrizes";
+            // 
+            // btnMulti
+            // 
+            this.btnMulti.Location = new System.Drawing.Point(6, 192);
+            this.btnMulti.Name = "btnMulti";
+            this.btnMulti.Size = new System.Drawing.Size(90, 27);
+            this.btnMulti.TabIndex = 26;
+            this.btnMulti.Text = "Multiplicar";
+            this.btnMulti.UseVisualStyleBackColor = true;
+            this.btnMulti.Click += new System.EventHandler(this.btnMulti_Click);
+            // 
             // frmMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 649);
+            this.ClientSize = new System.Drawing.Size(883, 684);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -876,6 +922,10 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cbxMatriz3;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnSomarDuasMatrizes;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnMulti;
     }
 }
 

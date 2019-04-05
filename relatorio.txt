@@ -24,3 +24,5 @@ operações
 
 - 04/04 - somar constante a coluna pronto
 
+- 05/04 - Somar matrizes pronto, erro no somar constante
+
