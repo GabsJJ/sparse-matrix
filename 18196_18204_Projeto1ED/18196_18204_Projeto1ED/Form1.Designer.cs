@@ -53,6 +53,10 @@
             this.dgvMatriz2 = new System.Windows.Forms.DataGridView();
             this.dgvMatriz3 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnMulti = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnSomarDuasMatrizes = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
             this.cbxMatriz3 = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -83,10 +87,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
-            this.label23 = new System.Windows.Forms.Label();
-            this.btnSomarDuasMatrizes = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.btnMulti = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -376,6 +376,7 @@
             this.dgvMatriz1.AllowUserToResizeColumns = false;
             this.dgvMatriz1.AllowUserToResizeRows = false;
             this.dgvMatriz1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatriz1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMatriz1.Location = new System.Drawing.Point(12, 235);
             this.dgvMatriz1.Name = "dgvMatriz1";
             this.dgvMatriz1.ReadOnly = true;
@@ -389,6 +390,7 @@
             this.dgvMatriz2.AllowUserToResizeColumns = false;
             this.dgvMatriz2.AllowUserToResizeRows = false;
             this.dgvMatriz2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatriz2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMatriz2.Location = new System.Drawing.Point(396, 235);
             this.dgvMatriz2.Name = "dgvMatriz2";
             this.dgvMatriz2.Size = new System.Drawing.Size(378, 200);
@@ -398,10 +400,10 @@
             // 
             this.dgvMatriz3.AllowUserToAddRows = false;
             this.dgvMatriz3.AllowUserToDeleteRows = false;
-            this.dgvMatriz3.AllowUserToOrderColumns = true;
             this.dgvMatriz3.AllowUserToResizeColumns = false;
             this.dgvMatriz3.AllowUserToResizeRows = false;
             this.dgvMatriz3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatriz3.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMatriz3.Location = new System.Drawing.Point(396, 441);
             this.dgvMatriz3.Name = "dgvMatriz3";
             this.dgvMatriz3.Size = new System.Drawing.Size(378, 231);
@@ -427,6 +429,44 @@
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Operações";
+            // 
+            // btnMulti
+            // 
+            this.btnMulti.Location = new System.Drawing.Point(6, 192);
+            this.btnMulti.Name = "btnMulti";
+            this.btnMulti.Size = new System.Drawing.Size(90, 27);
+            this.btnMulti.TabIndex = 26;
+            this.btnMulti.Text = "Multiplicar";
+            this.btnMulti.UseVisualStyleBackColor = true;
+            this.btnMulti.Click += new System.EventHandler(this.btnMulti_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 172);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(163, 17);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "Multiplicar duas Matrizes";
+            // 
+            // btnSomarDuasMatrizes
+            // 
+            this.btnSomarDuasMatrizes.Location = new System.Drawing.Point(6, 132);
+            this.btnSomarDuasMatrizes.Name = "btnSomarDuasMatrizes";
+            this.btnSomarDuasMatrizes.Size = new System.Drawing.Size(75, 27);
+            this.btnSomarDuasMatrizes.TabIndex = 24;
+            this.btnSomarDuasMatrizes.Text = "Somar";
+            this.btnSomarDuasMatrizes.UseVisualStyleBackColor = true;
+            this.btnSomarDuasMatrizes.Click += new System.EventHandler(this.btnSomarDuasMatrizes_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 112);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(164, 17);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Somar as duas Matrizes:";
             // 
             // cbxMatriz3
             // 
@@ -781,44 +821,6 @@
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(6, 112);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(164, 17);
-            this.label23.TabIndex = 23;
-            this.label23.Text = "Somar as duas Matrizes:";
-            // 
-            // btnSomarDuasMatrizes
-            // 
-            this.btnSomarDuasMatrizes.Location = new System.Drawing.Point(6, 132);
-            this.btnSomarDuasMatrizes.Name = "btnSomarDuasMatrizes";
-            this.btnSomarDuasMatrizes.Size = new System.Drawing.Size(75, 27);
-            this.btnSomarDuasMatrizes.TabIndex = 24;
-            this.btnSomarDuasMatrizes.Text = "Somar";
-            this.btnSomarDuasMatrizes.UseVisualStyleBackColor = true;
-            this.btnSomarDuasMatrizes.Click += new System.EventHandler(this.btnSomarDuasMatrizes_Click);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 172);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(163, 17);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "Multiplicar duas Matrizes";
-            // 
-            // btnMulti
-            // 
-            this.btnMulti.Location = new System.Drawing.Point(6, 192);
-            this.btnMulti.Name = "btnMulti";
-            this.btnMulti.Size = new System.Drawing.Size(90, 27);
-            this.btnMulti.TabIndex = 26;
-            this.btnMulti.Text = "Multiplicar";
-            this.btnMulti.UseVisualStyleBackColor = true;
-            this.btnMulti.Click += new System.EventHandler(this.btnMulti_Click);
             // 
             // frmMatriz
             // 
