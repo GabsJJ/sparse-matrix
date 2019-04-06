@@ -146,10 +146,16 @@ public class MatrizEsparsa
                         achou = true;
                         break;
                     }
-                    if (atual.Direita.Coluna < dado.Coluna)
-                        celulaLinhaAnterior = atual = atual.Direita;
-                    else
+                    if (dado.Coluna < atual.Direita.Coluna)
+                    {
+                        celulaLinhaAnterior = atual;
                         break;
+                    }
+                    else
+                    {
+                        celulaLinhaAnterior = atual.Direita;
+                        atual = atual.Direita;
+                    }
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
                 atualColuna = colunaProcurada;
@@ -161,10 +167,16 @@ public class MatrizEsparsa
                         achou = true;
                         break;
                     }
-                    if (atualColuna.Abaixo.Linha < dado.Linha)
-                        celulaColunaAnterior = atualColuna = atualColuna.Abaixo;
-                    else
+                    if (dado.Linha < atualColuna.Abaixo.Linha)
+                    {
+                        celulaColunaAnterior = atualColuna;
                         break;
+                    }
+                    else
+                    {
+                        celulaColunaAnterior = atualColuna.Abaixo;
+                        atualColuna = atualColuna.Abaixo;
+                    }
                 }
             }
         }
@@ -193,6 +205,9 @@ public class MatrizEsparsa
                             var aux2 = celulaLinhaAnterior.Direita;
                             celulaLinhaAnterior.Direita = dado;
                             dado.Direita = aux2;
+                            while(aux2.Direita != linhaAinserir)
+                                if(aux2.Direita != linhaAinserir)
+                                    aux2 = aux2.Direita;
                             dado = aux2;
                         }
                         else
@@ -209,6 +224,9 @@ public class MatrizEsparsa
                             var aux2 = celulaColunaAnterior.Abaixo;
                             celulaColunaAnterior.Abaixo = dado;
                             dado.Abaixo = aux2;
+                            while (aux2.Abaixo != colunaAinserir)
+                                if (aux2.Abaixo != colunaAinserir)
+                                    aux2 = aux2.Abaixo;
                             dado = aux2;
                         }
                         else

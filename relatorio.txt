@@ -24,5 +24,7 @@ operações
 
 - 04/04 - somar constante a coluna pronto
 
-- 05/04 - Somar matrizes pronto, erro no somar constante
+- 05/04 - Somar matrizes pronto, erro no somar constante. Mais tarde - existeDado aprimorado +
+todos os erros até essa parte, aparentemente solucionados, restando apenas a operação de multi
+plicação de matrizes para a finalização do projeto
 
