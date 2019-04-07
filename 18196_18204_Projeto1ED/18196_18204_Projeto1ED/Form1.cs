@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -49,7 +42,7 @@ namespace _18196_18204_Projeto1ED
 
         private void btnLerArq2_Click(object sender, EventArgs e)
         {
-            if (!matriz1.EstaVazia)
+            if (!matriz2.EstaVazia)
             {
                 var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -210,13 +203,53 @@ namespace _18196_18204_Projeto1ED
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-                MessageBox.Show("As matrizes devem não podem estar vazias!", "Alerta",
+                MessageBox.Show("As matrizes devem ser criadas!", "Alerta",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnMulti_Click(object sender, EventArgs e)
         {
+            if(cbxDuasMatrizesAmultiplicar.Items.Count != 0)
+            {
+                if (cbxDuasMatrizesAmultiplicar.SelectedItem.ToString() == "A x B")
+                {
+                    //Verifica se o numero de colunas da matriz A é igual ao numero de linhas da matriz B
+                    if (matriz1.Colunas == matriz2.Linhas)
+                    {
+                        var mat3 = matriz1.Multiplicar(matriz2);
+                        mat3.PrintarMatriz(dgvMatriz3);
+                    }
+                    else
+                        MessageBox.Show("Matrizes inválidas!", "Alerta",
+                              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    if (matriz2.Colunas == matriz1.Linhas)
+                    {
+                        var mat3 = matriz2.Multiplicar(matriz1);
+                        mat3.PrintarMatriz(dgvMatriz3);
+                    }
+                    else
+                        MessageBox.Show("Matrizes inválidas!", "Alerta",
+                              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+                MessageBox.Show("As matrizes devem ser criadas!", "Alerta",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
+        private void cbxDuasMatrizesAmultiplicar_Click(object sender, EventArgs e)
+        {
+            if (!matriz1.EstaVazia && !matriz2.EstaVazia)
+            {
+                if(cbxDuasMatrizesAmultiplicar.Items.Count == 0)
+                {
+                    cbxDuasMatrizesAmultiplicar.Items.Add("A x B");
+                    cbxDuasMatrizesAmultiplicar.Items.Add("B x A");
+                }
+            }
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e)

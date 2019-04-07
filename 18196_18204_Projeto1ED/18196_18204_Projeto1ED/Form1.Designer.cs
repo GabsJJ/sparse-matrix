@@ -87,6 +87,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
+            this.cbxDuasMatrizesAmultiplicar = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -411,6 +412,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbxDuasMatrizesAmultiplicar);
             this.groupBox3.Controls.Add(this.btnMulti);
             this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.btnSomarDuasMatrizes);
@@ -432,7 +434,7 @@
             // 
             // btnMulti
             // 
-            this.btnMulti.Location = new System.Drawing.Point(6, 192);
+            this.btnMulti.Location = new System.Drawing.Point(124, 193);
             this.btnMulti.Name = "btnMulti";
             this.btnMulti.Size = new System.Drawing.Size(90, 27);
             this.btnMulti.TabIndex = 26;
@@ -822,6 +824,16 @@
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
+            // cbxDuasMatrizesAmultiplicar
+            // 
+            this.cbxDuasMatrizesAmultiplicar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxDuasMatrizesAmultiplicar.FormattingEnabled = true;
+            this.cbxDuasMatrizesAmultiplicar.Location = new System.Drawing.Point(6, 195);
+            this.cbxDuasMatrizesAmultiplicar.Name = "cbxDuasMatrizesAmultiplicar";
+            this.cbxDuasMatrizesAmultiplicar.Size = new System.Drawing.Size(112, 24);
+            this.cbxDuasMatrizesAmultiplicar.TabIndex = 27;
+            this.cbxDuasMatrizesAmultiplicar.Click += new System.EventHandler(this.cbxDuasMatrizesAmultiplicar_Click);
+            // 
             // frmMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -928,6 +940,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnMulti;
+        private System.Windows.Forms.ComboBox cbxDuasMatrizesAmultiplicar;
     }
 }
 

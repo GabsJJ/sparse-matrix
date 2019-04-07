@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 public class MatrizEsparsa
 {
+    //Atributos
     int linhas, colunas;
-    //Nó -1 e -1
     Celula noCabeca, celulaLinhaAnterior, celulaColunaAnterior;
-    const int tamanhoNumero = 4;
 
     public MatrizEsparsa()
     {
@@ -25,6 +18,8 @@ public class MatrizEsparsa
     public bool ColunasVazias { get => NoCabeca.Direita == null; }
     public bool LinhasVazias { get => NoCabeca.Abaixo == null; }
     public Celula NoCabeca { get => noCabeca; set => noCabeca = value; }
+    public Celula CelulaLinhaAnterior { get => celulaLinhaAnterior; set => celulaLinhaAnterior = value; }
+    public Celula CelulaColunaAnterior { get => celulaColunaAnterior; set => celulaColunaAnterior = value; }
 
     public void PrintarMatriz(DataGridView dgvMatriz)
     {
@@ -33,16 +28,24 @@ public class MatrizEsparsa
             if (Linhas != 0 && Colunas != 0)
             {
                 Celula linhaAtual = NoCabeca.Abaixo;
+                //elementoComValor vai guardar um elemento que tenha algo dentro
                 Celula elementoComValor = linhaAtual.Direita;
                 dgvMatriz.RowCount = Linhas;
                 dgvMatriz.ColumnCount = Colunas;
                 int contAuxCol = 1;
                 int contAuxLinha = 1;
+                //Vai percorrer todas as cabeças das linhas
                 while (linhaAtual != NoCabeca)
                 {
+                    //Vai percorrer todas as cabeças das colunas
                     Celula colunaAtual = NoCabeca.Direita;
                     while (colunaAtual != NoCabeca)
                     {
+                        /*
+                         * se na coluna atual e na linha atual era suposto estar um elemento com um valor
+                         * este é adicionado no dgv, se a coluna atual e a linha não correspondem as do elemento
+                         * adicionamos 0 no dgv e vamos para outro elemento da lista
+                         */
                         if (contAuxCol == elementoComValor.Coluna && elementoComValor != linhaAtual)
                         {
                             dgvMatriz.Rows[contAuxLinha - 1].Cells[contAuxCol - 1].Value = elementoComValor.Valor;
@@ -205,8 +208,8 @@ public class MatrizEsparsa
                             var aux2 = celulaLinhaAnterior.Direita;
                             celulaLinhaAnterior.Direita = dado;
                             dado.Direita = aux2;
-                            while(aux2.Direita != linhaAinserir)
-                                if(aux2.Direita != linhaAinserir)
+                            while (aux2.Direita != linhaAinserir)
+                                if (aux2.Direita != linhaAinserir)
                                     aux2 = aux2.Direita;
                             dado = aux2;
                         }
@@ -267,7 +270,7 @@ public class MatrizEsparsa
 
     public void Pesquisar(int linha, int coluna, ref string resultado)
     {
-        var elemento = new Celula(null,null,linha,coluna,0);
+        var elemento = new Celula(null, null, linha, coluna, 0);
         Celula linhaDoElemento = null, colunaDoElemento = null;
         /*
          * ExisteDado retorna por referência, celulas correspondentes, ou aos nós cabeça
@@ -284,7 +287,7 @@ public class MatrizEsparsa
         int contAuxCol = 1, contAuxLinha = 1;
         var colunaAtual = NoCabeca.Direita;
         //Vai percorrer a matriz até achar a coluna correspondente a que o usuário deseja
-        while(contAuxCol <= colunaAsomar)
+        while (contAuxCol <= colunaAsomar)
         {
             //Caso o valor do contador auxiliar seja igual ao da coluna procurada, adicionamos na coluna
             //Senão, vamos para a coluna seguinte e implementamos o conAuxCol (contAuxCol = contador que indica a coluna atual)
@@ -293,11 +296,11 @@ public class MatrizEsparsa
                 //Caso achou a coluna correspondente, vai entrar em outra repetição abaixo
                 var celulaColunaAtual = colunaAtual.Abaixo;
                 double soma = 0;
-                while(contAuxLinha <= Linhas)
+                while (contAuxLinha <= Linhas)
                 {
                     //Se falta algum item na coluna, esse item será inserido (contAuxLinha = linha que o elemento deveria estar)
-                    if(celulaColunaAtual.Linha != contAuxLinha)
-                        InserirCelulaMatriz(new Celula(null, null, contAuxLinha, colunaAsomar, constante)); 
+                    if (celulaColunaAtual.Linha != contAuxLinha)
+                        InserirCelulaMatriz(new Celula(null, null, contAuxLinha, colunaAsomar, constante));
                     else
                     {
                         soma = celulaColunaAtual.Valor + constante;
@@ -322,14 +325,14 @@ public class MatrizEsparsa
         matNova.CriarNosCabecas(Linhas, Colunas);
 
         int contAuxLinha = 1, contAuxColuna = 1;
-        var linhaAtual      = NoCabeca.Abaixo;
+        var linhaAtual = NoCabeca.Abaixo;
         var linhaAtualOutra = outra.NoCabeca.Abaixo;
 
         var celulaLinhaMatrizAtual = linhaAtual.Direita;
         var celulaLinhaOutraMatriz = linhaAtualOutra.Direita;
         while (contAuxLinha <= Linhas)
         {
-            while(contAuxColuna <= Colunas)
+            while (contAuxColuna <= Colunas)
             {
                 if (celulaLinhaMatrizAtual.Coluna == contAuxColuna && celulaLinhaMatrizAtual.Linha == contAuxLinha)
                 {
@@ -368,6 +371,63 @@ public class MatrizEsparsa
             contAuxLinha++;
             contAuxColuna = 1;
         }
+        return matNova;
+    }
+
+    public MatrizEsparsa Multiplicar(MatrizEsparsa outra)
+    {
+        var matNova = new MatrizEsparsa();
+        matNova.CriarNosCabecas(Linhas, outra.Colunas);
+
+        int contAuxLinha = 1, contAuxColuna = 1;
+
+        var linhaMatrizA = NoCabeca.Abaixo;
+        var celulaLinhaMatrizA = linhaMatrizA.Direita;
+
+        var linhaMatrizB = outra.NoCabeca.Abaixo;
+        var colunaMatrizB = outra.NoCabeca.Direita;
+        var celulaColunaMatrizB = colunaMatrizB.Abaixo;
+
+        var celulaAtualMatNova = matNova.NoCabeca.Abaixo;
+        double somaMultiplicacoes = 0;
+
+        while (contAuxLinha <= matNova.Linhas && contAuxColuna <= matNova.Colunas)
+        {
+            while(celulaLinhaMatrizA != linhaMatrizA && celulaColunaMatrizB != colunaMatrizB)
+            {
+                somaMultiplicacoes += celulaLinhaMatrizA.Valor * celulaColunaMatrizB.Valor;
+                celulaLinhaMatrizA = celulaLinhaMatrizA.Direita;
+                celulaColunaMatrizB = celulaColunaMatrizB.Abaixo;
+                
+            }
+            celulaLinhaMatrizA = linhaMatrizA.Direita;
+            colunaMatrizB = colunaMatrizB.Direita;
+            celulaColunaMatrizB = colunaMatrizB.Abaixo;            
+            if (celulaColunaMatrizB == linhaMatrizB)
+            {
+                linhaMatrizA = linhaMatrizA.Abaixo;
+                celulaLinhaMatrizA = linhaMatrizA.Direita;
+                colunaMatrizB = outra.NoCabeca.Direita;
+                celulaColunaMatrizB = colunaMatrizB.Abaixo;
+            }
+
+            if (somaMultiplicacoes != 0)
+                matNova.InserirCelulaMatriz(new Celula(null, null, contAuxLinha, contAuxColuna, somaMultiplicacoes));
+            somaMultiplicacoes = 0;
+
+            if (contAuxColuna == matNova.Colunas)
+            {
+                contAuxLinha++;
+                contAuxColuna = 0;
+            } 
+            if(contAuxColuna == matNova.Colunas && contAuxLinha == matNova.Linhas)
+            {
+                contAuxColuna = matNova.Colunas + 1;
+                contAuxLinha = matNova.Linhas + 1;
+            }
+            contAuxColuna++;
+        }
+
         return matNova;
     }
 }
