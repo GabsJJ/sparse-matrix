@@ -88,6 +88,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -237,6 +238,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnRemover);
             this.groupBox2.Controls.Add(this.btnInserir);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.txtValor);
@@ -836,6 +838,16 @@
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
+            // btnRemover
+            // 
+            this.btnRemover.Location = new System.Drawing.Point(87, 184);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(75, 27);
+            this.btnRemover.TabIndex = 17;
+            this.btnRemover.Text = "Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -943,6 +955,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnMulti;
         private System.Windows.Forms.ComboBox cbxDuasMatrizesAmultiplicar;
+        private System.Windows.Forms.Button btnRemover;
     }
 }
 

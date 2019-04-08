@@ -148,66 +148,95 @@ namespace _18196_18204_Projeto1ED
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (int.Parse(txtValor.Text) < 10000)
+            if (cbxMatrizes.SelectedItem != null)
             {
-                if (cbxMatrizes.SelectedItem.ToString() == "1")
+                if (txtValor.Text.Length < 11)
                 {
-                    if (txtValor.Text.Trim() != "")
+                    if (cbxMatrizes.SelectedItem.ToString() == "1")
                     {
-                        //o usuário deve indicar um número de colunas e linhas valido
-                        if (int.Parse(nudLinhas3.Value.ToString()) <= matriz1.Linhas 
-                            && int.Parse(nudColunas3.Value.ToString()) <= matriz1.Colunas)
+                        if (txtValor.Text.Trim() != "")
                         {
-                            var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
-                            int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
-                            matriz1.InserirCelulaMatriz(valor);
-                            matriz1.PrintarMatriz(dgvMatriz1);
+                            //o usuário deve indicar um número de colunas e linhas valido
+                            if (int.Parse(nudLinhas3.Value.ToString()) <= matriz1.Linhas
+                                && int.Parse(nudColunas3.Value.ToString()) <= matriz1.Colunas)
+                            {
+                                var btnClicado = sender as Button;
+                                Celula valor = null;
+                                if (btnClicado.Text == "Remover")
+                                    valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                                        int.Parse(nudColunas3.Value.ToString()), 0);
+                                else
+                                    valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                                        int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
+                                matriz1.InserirCelulaMatriz(valor);
+                                matriz1.PrintarMatriz(dgvMatriz1);
+                            }
+                            else
+                                MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
-                        else
-                            MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        if (txtValor.Text.Trim() != "")
+                        {
+                            if (int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Linhas && int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Colunas)
+                            {
+                                var btnClicado = sender as Button;
+                                Celula valor = null;
+                                if (btnClicado.Text == "Remover")
+                                     valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                                        int.Parse(nudColunas3.Value.ToString()), 0);
+                                else
+                                    valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                                        int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
+                                matriz2.InserirCelulaMatriz(valor);
+                                matriz2.PrintarMatriz(dgvMatriz2);
+                            }
+                            else
+                                MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
                     }
                 }
                 else
-                {
-                    if (txtValor.Text.Trim() != "")
-                    {
-                        if (int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Linhas && int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Colunas)
-                        {
-                            var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
-                            int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
-                            matriz2.InserirCelulaMatriz(valor);
-                            matriz2.PrintarMatriz(dgvMatriz2);
-                        }
-                        else
-                            MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                }
+                    MessageBox.Show("Valor muito grande!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
+            else
+                MessageBox.Show("Escolha uma matriz!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnSomar_Click(object sender, EventArgs e)
         {
-            if (int.Parse(txtValor2.Text) < 10000)
+            if (cbxMatriz3.SelectedItem != null)
             {
-                if (txtValor2.Text.Trim() != "")
+                if (txtValor2.Text.Length < 11)
                 {
-                    if (cbxMatriz3.SelectedItem.ToString() == "1")
+                    if (txtValor2.Text.Trim() != "")
                     {
-                        matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
-                            int.Parse(txtValor2.Text));
-                        matriz1.PrintarMatriz(dgvMatriz1);
-                    }
-                    else
-                    {
-                        matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
-                                                int.Parse(txtValor2.Text));
-                        matriz2.PrintarMatriz(dgvMatriz2);
+                        if (cbxMatriz3.SelectedItem.ToString() == "1")
+                        {
+                            matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
+                                int.Parse(txtValor2.Text));
+                            matriz1.PrintarMatriz(dgvMatriz1);
+                        }
+                        else
+                        {
+                            matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
+                                                    int.Parse(txtValor2.Text));
+                            matriz2.PrintarMatriz(dgvMatriz2);
+                        }
                     }
                 }
+                else
+                    MessageBox.Show("Valor muito grande!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            else
+                MessageBox.Show("Escolha uma matriz!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnSomarDuasMatrizes_Click(object sender, EventArgs e)
@@ -230,35 +259,41 @@ namespace _18196_18204_Projeto1ED
 
         private void btnMulti_Click(object sender, EventArgs e)
         {
-            if (cbxDuasMatrizesAmultiplicar.Items.Count != 0)
+            if (cbxDuasMatrizesAmultiplicar.SelectedItem != null)
             {
-                if (cbxDuasMatrizesAmultiplicar.SelectedItem.ToString() == "A x B")
+                if (cbxDuasMatrizesAmultiplicar.Items.Count != 0)
                 {
-                    //Verifica se o numero de colunas da matriz A é igual ao numero de linhas da matriz B
-                    if (matriz1.Colunas == matriz2.Linhas)
+                    if (cbxDuasMatrizesAmultiplicar.SelectedItem.ToString() == "A x B")
                     {
-                        var mat3 = matriz1.Multiplicar(matriz2);
-                        mat3.PrintarMatriz(dgvMatriz3);
+                        //Verifica se o numero de colunas da matriz A é igual ao numero de linhas da matriz B
+                        if (matriz1.Colunas == matriz2.Linhas)
+                        {
+                            var mat3 = matriz1.Multiplicar(matriz2);
+                            mat3.PrintarMatriz(dgvMatriz3);
+                        }
+                        else
+                            MessageBox.Show("Matrizes inválidas!", "Alerta",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
-                        MessageBox.Show("Matrizes inválidas!", "Alerta",
-                              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    {
+                        if (matriz2.Colunas == matriz1.Linhas)
+                        {
+                            var mat3 = matriz2.Multiplicar(matriz1);
+                            mat3.PrintarMatriz(dgvMatriz3);
+                        }
+                        else
+                            MessageBox.Show("Matrizes inválidas!", "Alerta",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
                 else
-                {
-                    if (matriz2.Colunas == matriz1.Linhas)
-                    {
-                        var mat3 = matriz2.Multiplicar(matriz1);
-                        mat3.PrintarMatriz(dgvMatriz3);
-                    }
-                    else
-                        MessageBox.Show("Matrizes inválidas!", "Alerta",
-                              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                    MessageBox.Show("As matrizes devem ser criadas!", "Alerta",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-                MessageBox.Show("As matrizes devem ser criadas!", "Alerta",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Escolha uma matriz!", "Alerta",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void cbxDuasMatrizesAmultiplicar_Click(object sender, EventArgs e)
@@ -275,20 +310,40 @@ namespace _18196_18204_Projeto1ED
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes2.SelectedItem.ToString() == "1")
+            if (cbxMatrizes2.SelectedItem != null)
             {
-                string val = "";
-                matriz1.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
-                    int.Parse(nudColunas4.Value.ToString()), ref val);
-                lblRetorno.Text = val;
+                if (cbxMatrizes2.SelectedItem.ToString() == "1")
+                {
+                    if (int.Parse(nudLinhas4.Value.ToString()) <= matriz1.Linhas
+                                && int.Parse(nudColunas4.Value.ToString()) <= matriz1.Colunas)
+                    {
+                        string val = "";
+                        matriz1.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
+                            int.Parse(nudColunas4.Value.ToString()), ref val);
+                        lblRetorno.Text = val;
+                    }
+                    else
+                        MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    if (int.Parse(nudLinhas4.Value.ToString()) <= matriz2.Linhas
+                                && int.Parse(nudColunas4.Value.ToString()) <= matriz2.Colunas)
+                    {
+                        string val = "";
+                        matriz2.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
+                            int.Parse(nudColunas4.Value.ToString()), ref val);
+                        lblRetorno.Text = val;
+                    }
+                    else
+                        MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
             else
-            {
-                string val = "";
-                matriz2.Pesquisar(int.Parse(nudLinhas4.Value.ToString()),
-                    int.Parse(nudColunas4.Value.ToString()), ref val);
-                lblRetorno.Text = val;
-            }
+                MessageBox.Show("Escolha uma matriz!", "Alerta",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }
