@@ -26,18 +26,33 @@ namespace _18196_18204_Projeto1ED
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
-                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
-                    matriz1.PrintarMatriz(dgvMatriz1);
+                    try
+                    {
+                        if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                            LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
+                        matriz1.PrintarMatriz(dgvMatriz1);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Erro ao ler arquivo", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
             }
             else
             {
-                if (dlgMatriz1.ShowDialog() == DialogResult.OK)
-                    LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
-                matriz1.PrintarMatriz(dgvMatriz1);
+                try
+                {
+                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
+                    matriz1.PrintarMatriz(dgvMatriz1);
+                }
+                catch
+                {
+                    MessageBox.Show("Erro ao ler arquivo", "Alerta",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-
         }
 
         private void btnLerArq2_Click(object sender, EventArgs e)
@@ -48,16 +63,32 @@ namespace _18196_18204_Projeto1ED
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
-                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
-                    matriz2.PrintarMatriz(dgvMatriz2);
+                    try
+                    {
+                        if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                            LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
+                        matriz2.PrintarMatriz(dgvMatriz2);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Erro ao ler arquivo", "Alerta",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
             }
             else
             {
-                if (dlgMatriz1.ShowDialog() == DialogResult.OK)
-                    LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
-                matriz2.PrintarMatriz(dgvMatriz2);
+                try
+                {
+                    if (dlgMatriz1.ShowDialog() == DialogResult.OK)
+                        LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz2);
+                    matriz2.PrintarMatriz(dgvMatriz2);
+                }
+                catch
+                {
+                    MessageBox.Show("Erro ao ler arquivo", "Alerta",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 
@@ -72,7 +103,8 @@ namespace _18196_18204_Projeto1ED
                 {
                     linha = arq.ReadLine();
                     chars = linha.Split(';');
-                    mat.CriarNosCabecas(int.Parse(chars[0]), int.Parse(chars[1]));
+                    if((int.Parse(chars[0]) <= 600 && int.Parse(chars[1]) <= 600))
+                        mat.CriarNosCabecas(int.Parse(chars[0]), int.Parse(chars[1]));
                     primeiraLeitura = false;
                 }
                 else
@@ -128,13 +160,15 @@ namespace _18196_18204_Projeto1ED
         private void btnPrintar1_Click(object sender, EventArgs e)
         {
             if (!matriz1.EstaVazia)
-                matriz1.PrintarMatriz(dgvMatriz1);
+                matriz1.ExcluirTodaMatriz();
+            matriz1.PrintarMatriz(dgvMatriz1);
         }
 
         private void btnPrintar2_Click(object sender, EventArgs e)
         {
             if (!matriz2.EstaVazia)
-                matriz2.PrintarMatriz(dgvMatriz2);
+                matriz2.ExcluirTodaMatriz();
+            matriz2.PrintarMatriz(dgvMatriz2);
         }
 
         private void comboBox1_Click(object sender, EventArgs e)
@@ -142,8 +176,12 @@ namespace _18196_18204_Projeto1ED
             var cbx = sender as ComboBox;
             if (!matriz1.EstaVazia && !cbx.Items.Contains(1))
                 cbx.Items.Add(1);
+            else
+                cbx.Items.Remove(1);
             if (!matriz2.EstaVazia && !cbx.Items.Contains(2))
                 cbx.Items.Add(2);
+            else
+                cbx.Items.Remove(2);
         }
 
         private void button2_Click(object sender, EventArgs e)

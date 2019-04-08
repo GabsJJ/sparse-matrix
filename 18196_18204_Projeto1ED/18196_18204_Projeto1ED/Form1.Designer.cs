@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnPrintar1 = new System.Windows.Forms.Button();
+            this.btnExcluirMatriz1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudColunas1 = new System.Windows.Forms.NumericUpDown();
@@ -39,6 +39,7 @@
             this.btnLerArq1 = new System.Windows.Forms.Button();
             this.btnCriar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.btnInserir = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.txtValor = new System.Windows.Forms.TextBox();
@@ -68,7 +69,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.dlgMatriz1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnPrintar2 = new System.Windows.Forms.Button();
+            this.btnExcluirMatriz2 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.nudColunas2 = new System.Windows.Forms.NumericUpDown();
@@ -88,7 +89,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
-            this.btnRemover = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -110,7 +110,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnPrintar1);
+            this.groupBox1.Controls.Add(this.btnExcluirMatriz1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.nudColunas1);
@@ -126,15 +126,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criação da matriz 1";
             // 
-            // btnPrintar1
+            // btnExcluirMatriz1
             // 
-            this.btnPrintar1.Location = new System.Drawing.Point(112, 184);
-            this.btnPrintar1.Name = "btnPrintar1";
-            this.btnPrintar1.Size = new System.Drawing.Size(70, 27);
-            this.btnPrintar1.TabIndex = 9;
-            this.btnPrintar1.Text = "Printar";
-            this.btnPrintar1.UseVisualStyleBackColor = true;
-            this.btnPrintar1.Click += new System.EventHandler(this.btnPrintar1_Click);
+            this.btnExcluirMatriz1.Location = new System.Drawing.Point(103, 184);
+            this.btnExcluirMatriz1.Name = "btnExcluirMatriz1";
+            this.btnExcluirMatriz1.Size = new System.Drawing.Size(100, 27);
+            this.btnExcluirMatriz1.TabIndex = 9;
+            this.btnExcluirMatriz1.Text = "Excluir matriz";
+            this.btnExcluirMatriz1.UseVisualStyleBackColor = true;
+            this.btnExcluirMatriz1.Click += new System.EventHandler(this.btnPrintar1_Click);
             // 
             // label4
             // 
@@ -228,7 +228,7 @@
             // 
             // btnCriar
             // 
-            this.btnCriar.Location = new System.Drawing.Point(9, 184);
+            this.btnCriar.Location = new System.Drawing.Point(6, 184);
             this.btnCriar.Name = "btnCriar";
             this.btnCriar.Size = new System.Drawing.Size(97, 27);
             this.btnCriar.TabIndex = 0;
@@ -255,6 +255,16 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inserir/Remover dados";
+            // 
+            // btnRemover
+            // 
+            this.btnRemover.Location = new System.Drawing.Point(87, 184);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(75, 27);
+            this.btnRemover.TabIndex = 17;
+            this.btnRemover.Text = "Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnInserir
             // 
@@ -575,7 +585,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.btnPrintar2);
+            this.groupBox4.Controls.Add(this.btnExcluirMatriz2);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.nudColunas2);
@@ -591,15 +601,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Criação da matriz 2";
             // 
-            // btnPrintar2
+            // btnExcluirMatriz2
             // 
-            this.btnPrintar2.Location = new System.Drawing.Point(109, 184);
-            this.btnPrintar2.Name = "btnPrintar2";
-            this.btnPrintar2.Size = new System.Drawing.Size(70, 27);
-            this.btnPrintar2.TabIndex = 10;
-            this.btnPrintar2.Text = "Printar";
-            this.btnPrintar2.UseVisualStyleBackColor = true;
-            this.btnPrintar2.Click += new System.EventHandler(this.btnPrintar2_Click);
+            this.btnExcluirMatriz2.Location = new System.Drawing.Point(103, 184);
+            this.btnExcluirMatriz2.Name = "btnExcluirMatriz2";
+            this.btnExcluirMatriz2.Size = new System.Drawing.Size(101, 27);
+            this.btnExcluirMatriz2.TabIndex = 10;
+            this.btnExcluirMatriz2.Text = "Excluir matriz";
+            this.btnExcluirMatriz2.UseVisualStyleBackColor = true;
+            this.btnExcluirMatriz2.Click += new System.EventHandler(this.btnPrintar2_Click);
             // 
             // label10
             // 
@@ -838,16 +848,6 @@
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
-            // btnRemover
-            // 
-            this.btnRemover.Location = new System.Drawing.Point(87, 184);
-            this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(75, 27);
-            this.btnRemover.TabIndex = 17;
-            this.btnRemover.Text = "Remover";
-            this.btnRemover.UseVisualStyleBackColor = true;
-            this.btnRemover.Click += new System.EventHandler(this.button2_Click);
-            // 
             // frmMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -929,8 +929,8 @@
         private System.Windows.Forms.NumericUpDown nudLinhas2;
         private System.Windows.Forms.Button btnLerArq2;
         private System.Windows.Forms.Button btnCriar2;
-        private System.Windows.Forms.Button btnPrintar1;
-        private System.Windows.Forms.Button btnPrintar2;
+        private System.Windows.Forms.Button btnExcluirMatriz1;
+        private System.Windows.Forms.Button btnExcluirMatriz2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label lblRetorno;
         private System.Windows.Forms.Label label17;

@@ -20,7 +20,7 @@ public class Celula : IComparable<Celula>
         this.Valor = val;
     }
 
-    //Usado pra instanciar o noCabeca
+    //Usado pra instanciar o noCabeca principal
     public Celula()
     {
         this.Direita = null;
