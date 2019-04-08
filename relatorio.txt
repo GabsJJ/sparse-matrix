@@ -26,5 +26,7 @@ de remover os elementos da matriz também.
 o que resolveu o problema da soma da constante assim como todos os erros até essa parte foram solucionados, restando apenas a operação de multiplicação de 
 matrizes para a finalização do projeto.
 
-- 06/04 - Método de multiplicação pronto, e projeto finalizado.
+- 06/04 - Método de multiplicação pronto, e projeto aparentemente finalizado.
+
+- 08/04 - Acabei descobrindo um novo erro no somar constante, porém este era bem simples, e agora o projeto aparenta estar finalizado
 
