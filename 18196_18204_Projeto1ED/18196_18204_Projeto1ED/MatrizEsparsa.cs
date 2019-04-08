@@ -52,7 +52,10 @@ public class MatrizEsparsa
                             elementoComValor = elementoComValor.Direita;
                         }
                         else
+                        {
                             dgvMatriz.Rows[contAuxLinha - 1].Cells[contAuxCol - 1].Value = 0;
+                            //contAuxLinha++;
+                        }   
                         colunaAtual = colunaAtual.Direita;
                         contAuxCol++;
                     }
@@ -141,6 +144,7 @@ public class MatrizEsparsa
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma linha que o elemento em si
                 atual = linhaProcurada;
+                celulaLinhaAnterior = atual;
                 while (atual.Direita.Linha != linhaProcurada.Linha) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atual.Direita.Linha == dado.Linha && atual.Direita.Coluna == dado.Coluna)
@@ -162,6 +166,7 @@ public class MatrizEsparsa
                 }
                 //Procura a célula do elemento procurado e também a celula anterior na mesma coluna que o elemento em si
                 atualColuna = colunaProcurada;
+                celulaColunaAnterior = atualColuna;
                 while (atualColuna.Abaixo.Coluna != colunaProcurada.Coluna) //analogo: atual.direita != null (lista ligada simples)
                 {
                     if (atualColuna.Abaixo.Linha == dado.Linha && atualColuna.Abaixo.Coluna == dado.Coluna)
@@ -398,7 +403,6 @@ public class MatrizEsparsa
                 somaMultiplicacoes += celulaLinhaMatrizA.Valor * celulaColunaMatrizB.Valor;
                 celulaLinhaMatrizA = celulaLinhaMatrizA.Direita;
                 celulaColunaMatrizB = celulaColunaMatrizB.Abaixo;
-                
             }
             celulaLinhaMatrizA = linhaMatrizA.Direita;
             colunaMatrizB = colunaMatrizB.Direita;

@@ -53,6 +53,7 @@
             this.dgvMatriz2 = new System.Windows.Forms.DataGridView();
             this.dgvMatriz3 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbxDuasMatrizesAmultiplicar = new System.Windows.Forms.ComboBox();
             this.btnMulti = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.btnSomarDuasMatrizes = new System.Windows.Forms.Button();
@@ -87,7 +88,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.nudLinhas4 = new System.Windows.Forms.NumericUpDown();
             this.btnPesquisar = new System.Windows.Forms.Button();
-            this.cbxDuasMatrizesAmultiplicar = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColunas1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLinhas1)).BeginInit();
@@ -276,6 +276,7 @@
             // txtValor
             // 
             this.txtValor.Location = new System.Drawing.Point(71, 157);
+            this.txtValor.MaxLength = 10000;
             this.txtValor.Name = "txtValor";
             this.txtValor.Size = new System.Drawing.Size(87, 23);
             this.txtValor.TabIndex = 15;
@@ -432,6 +433,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Operações";
             // 
+            // cbxDuasMatrizesAmultiplicar
+            // 
+            this.cbxDuasMatrizesAmultiplicar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxDuasMatrizesAmultiplicar.FormattingEnabled = true;
+            this.cbxDuasMatrizesAmultiplicar.Location = new System.Drawing.Point(6, 195);
+            this.cbxDuasMatrizesAmultiplicar.Name = "cbxDuasMatrizesAmultiplicar";
+            this.cbxDuasMatrizesAmultiplicar.Size = new System.Drawing.Size(112, 24);
+            this.cbxDuasMatrizesAmultiplicar.TabIndex = 27;
+            this.cbxDuasMatrizesAmultiplicar.Click += new System.EventHandler(this.cbxDuasMatrizesAmultiplicar_Click);
+            // 
             // btnMulti
             // 
             this.btnMulti.Location = new System.Drawing.Point(124, 193);
@@ -542,6 +553,7 @@
             // txtValor2
             // 
             this.txtValor2.Location = new System.Drawing.Point(57, 77);
+            this.txtValor2.MaxLength = 10000;
             this.txtValor2.Name = "txtValor2";
             this.txtValor2.Size = new System.Drawing.Size(60, 23);
             this.txtValor2.TabIndex = 16;
@@ -823,16 +835,6 @@
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
-            // 
-            // cbxDuasMatrizesAmultiplicar
-            // 
-            this.cbxDuasMatrizesAmultiplicar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxDuasMatrizesAmultiplicar.FormattingEnabled = true;
-            this.cbxDuasMatrizesAmultiplicar.Location = new System.Drawing.Point(6, 195);
-            this.cbxDuasMatrizesAmultiplicar.Name = "cbxDuasMatrizesAmultiplicar";
-            this.cbxDuasMatrizesAmultiplicar.Size = new System.Drawing.Size(112, 24);
-            this.cbxDuasMatrizesAmultiplicar.TabIndex = 27;
-            this.cbxDuasMatrizesAmultiplicar.Click += new System.EventHandler(this.cbxDuasMatrizesAmultiplicar_Click);
             // 
             // frmMatriz
             // 

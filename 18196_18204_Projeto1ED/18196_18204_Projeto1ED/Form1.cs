@@ -37,7 +37,7 @@ namespace _18196_18204_Projeto1ED
                     LerArquivo(new StreamReader(dlgMatriz1.FileName), matriz1);
                 matriz1.PrintarMatriz(dgvMatriz1);
             }
-            
+
         }
 
         private void btnLerArq2_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace _18196_18204_Projeto1ED
             string[] chars;
             while (!arq.EndOfStream)
             {
-                if(primeiraLeitura)
+                if (primeiraLeitura)
                 {
                     linha = arq.ReadLine();
                     chars = linha.Split(';');
@@ -89,7 +89,7 @@ namespace _18196_18204_Projeto1ED
             {
                 var result = MessageBox.Show("Deseja criar novamente a matriz ?", "Alerta",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     matriz1.CriarNosCabecas(int.Parse(nudLinhas1.Value.ToString()),
                                     int.Parse(nudColunas1.Value.ToString()));
@@ -142,58 +142,79 @@ namespace _18196_18204_Projeto1ED
             var cbx = sender as ComboBox;
             if (!matriz1.EstaVazia && !cbx.Items.Contains(1))
                 cbx.Items.Add(1);
-            if(!matriz2.EstaVazia && !cbx.Items.Contains(2))
+            if (!matriz2.EstaVazia && !cbx.Items.Contains(2))
                 cbx.Items.Add(2);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (cbxMatrizes.SelectedItem.ToString() == "1")
+            if (int.Parse(txtValor.Text) < 10000)
             {
-                if(txtValor.Text.Trim() != "")
+                if (cbxMatrizes.SelectedItem.ToString() == "1")
                 {
-                    var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()), 
-                        int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
-                    matriz1.InserirCelulaMatriz(valor);
-                    matriz1.PrintarMatriz(dgvMatriz1);
+                    if (txtValor.Text.Trim() != "")
+                    {
+                        //o usuário deve indicar um número de colunas e linhas valido
+                        if (int.Parse(nudLinhas3.Value.ToString()) <= matriz1.Linhas 
+                            && int.Parse(nudColunas3.Value.ToString()) <= matriz1.Colunas)
+                        {
+                            var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                            int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
+                            matriz1.InserirCelulaMatriz(valor);
+                            matriz1.PrintarMatriz(dgvMatriz1);
+                        }
+                        else
+                            MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+                else
+                {
+                    if (txtValor.Text.Trim() != "")
+                    {
+                        if (int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Linhas && int.Parse(nudLinhas3.Value.ToString()) <= matriz2.Colunas)
+                        {
+                            var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
+                            int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
+                            matriz2.InserirCelulaMatriz(valor);
+                            matriz2.PrintarMatriz(dgvMatriz2);
+                        }
+                        else
+                            MessageBox.Show("Indique uma coluna/linha válida!", "Alerta",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
             }
-            else
-            {
-                if (txtValor.Text.Trim() != "")
-                {
-                    var valor = new Celula(null, null, int.Parse(nudLinhas3.Value.ToString()),
-                        int.Parse(nudColunas3.Value.ToString()), int.Parse(txtValor.Text.Trim()));
-                    matriz2.InserirCelulaMatriz(valor);
-                    matriz2.PrintarMatriz(dgvMatriz2);
-                }
-            }
+
         }
 
         private void btnSomar_Click(object sender, EventArgs e)
         {
-            if(txtValor2.Text.Trim() != "")
+            if (int.Parse(txtValor2.Text) < 10000)
             {
-                if(cbxMatriz3.SelectedItem.ToString() == "1")
+                if (txtValor2.Text.Trim() != "")
                 {
-                    matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()), 
-                        int.Parse(txtValor2.Text));
-                    matriz1.PrintarMatriz(dgvMatriz1);
-                }
-                else
-                {
-                    matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
-                                            int.Parse(txtValor2.Text));
-                    matriz2.PrintarMatriz(dgvMatriz2);
+                    if (cbxMatriz3.SelectedItem.ToString() == "1")
+                    {
+                        matriz1.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
+                            int.Parse(txtValor2.Text));
+                        matriz1.PrintarMatriz(dgvMatriz1);
+                    }
+                    else
+                    {
+                        matriz2.SomarConstanteColuna(int.Parse(nudColuna5.Value.ToString()),
+                                                int.Parse(txtValor2.Text));
+                        matriz2.PrintarMatriz(dgvMatriz2);
+                    }
                 }
             }
         }
 
         private void btnSomarDuasMatrizes_Click(object sender, EventArgs e)
         {
-            if(!matriz1.EstaVazia && !matriz2.EstaVazia)
+            if (!matriz1.EstaVazia && !matriz2.EstaVazia)
             {
-                if(matriz1.Linhas == matriz2.Linhas && matriz1.Colunas == matriz2.Colunas)
+                if (matriz1.Linhas == matriz2.Linhas && matriz1.Colunas == matriz2.Colunas)
                 {
                     var mat3 = matriz1.SomarDuasMatrizes(matriz2);
                     mat3.PrintarMatriz(dgvMatriz3);
@@ -209,7 +230,7 @@ namespace _18196_18204_Projeto1ED
 
         private void btnMulti_Click(object sender, EventArgs e)
         {
-            if(cbxDuasMatrizesAmultiplicar.Items.Count != 0)
+            if (cbxDuasMatrizesAmultiplicar.Items.Count != 0)
             {
                 if (cbxDuasMatrizesAmultiplicar.SelectedItem.ToString() == "A x B")
                 {
@@ -244,7 +265,7 @@ namespace _18196_18204_Projeto1ED
         {
             if (!matriz1.EstaVazia && !matriz2.EstaVazia)
             {
-                if(cbxDuasMatrizesAmultiplicar.Items.Count == 0)
+                if (cbxDuasMatrizesAmultiplicar.Items.Count == 0)
                 {
                     cbxDuasMatrizesAmultiplicar.Items.Add("A x B");
                     cbxDuasMatrizesAmultiplicar.Items.Add("B x A");
